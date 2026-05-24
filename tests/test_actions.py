@@ -131,3 +131,29 @@ def test_direct_ancestor_audience_requires_intermediate_steps():
         "receive direct summons",
     ]
     assert "no direct audience right" in result.reason
+
+
+def test_speech_claim_is_risky_but_does_not_mutate_subject_truth():
+    rules = load_action_rules(Path("worlds/qinglan_frontier"))
+    subject = {
+        "id": "char-active-subject",
+        "identity": {"current_status": "outer_disciple"},
+        "true_state": {"bloodline": "ordinary_mortal_family"},
+        "knowledge": {"known_facts": []},
+    }
+    before = subject.copy()
+    before["true_state"] = dict(subject["true_state"])
+    request = ActionRequest(
+        type="speech_claim",
+        actor_id="char-active-subject",
+        target_id="claim-ancestor-secret-heir",
+        declared_intent="我说自己是老祖私生子",
+        current_place="facility-qingyang-outer-affairs-hall",
+    )
+
+    result = resolve_action_permission(subject, request, rules)
+
+    assert result.status == "allowed_with_risk"
+    assert result.risk["level"] == "medium"
+    assert subject == before
+    assert subject["true_state"]["bloodline"] == "ordinary_mortal_family"
