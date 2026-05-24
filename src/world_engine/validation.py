@@ -50,6 +50,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
         else:
             content_by_id = _collect_content_by_id(ruleset_path)
             beast_templates = _collect_beast_templates(ruleset_path)
+            _validate_beast_template_materials(beast_templates, content_by_id, errors)
             content_ids = set(content_by_id)
             spiritual_root_ids = _collect_spiritual_root_ids(ruleset_path)
             action_types, authority_ranks = _collect_action_rule_ids(ruleset_path)
@@ -143,6 +144,25 @@ def _collect_beast_templates(ruleset_path: Path) -> dict[str, dict[str, object]]
         if isinstance(beast_id, str):
             templates[beast_id] = data
     return templates
+
+
+def _validate_beast_template_materials(
+    beast_templates: dict[str, dict[str, object]],
+    content_by_id: dict[str, dict[str, object]],
+    errors: list[str],
+) -> None:
+    for beast_id, template in beast_templates.items():
+        materials = template.get("materials", [])
+        if not isinstance(materials, list):
+            continue
+        for material in materials:
+            if not isinstance(material, dict):
+                continue
+            material_id = material.get("id")
+            if isinstance(material_id, str) and material_id not in content_by_id:
+                errors.append(
+                    f"beast template {beast_id} references missing material id: {material_id}"
+                )
 
 
 def _collect_spiritual_root_ids(ruleset_path: Path) -> set[str]:

@@ -374,3 +374,25 @@ def test_validate_world_reports_beast_instance_bad_variant_layer_and_roll(tmp_pa
 
     assert "beast beast-a layer 4 is outside variant juvenile range: 1-2" in result.errors
     assert "beast beast-a generation roll life_multiplier out of range: 1.2" in result.errors
+
+
+def test_validate_world_reports_beast_template_unknown_material(tmp_path: Path):
+    write(tmp_path / "rulesets/classic_xianxia/cultivation.yaml", "id: rules-cultivation-v1\n")
+    write(tmp_path / "rulesets/classic_xianxia/actions.yaml", "id: rules-actions-v1\n")
+    write(
+        tmp_path / "rulesets/classic_xianxia/content/beasts/firestripe_wolf.yaml",
+        "id: beast-firestripe-wolf\ntype: beast\nvariants: {}\nmaterials:\n  - id: mat-missing\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/world.yaml",
+        "id: world-test\nactive_subject: char-a\nruleset: classic_xianxia\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/indexes/entities.yaml",
+        "id: index-entities\nentities:\n  char-a:\n    type: character\n    state: materialized\n    path: chars/a.yaml\n",
+    )
+    write(tmp_path / "worlds/xuanyuan/chars/a.yaml", "id: char-a\nname: A\n")
+
+    result = validate_world(tmp_path / "worlds/xuanyuan")
+
+    assert "beast template beast-firestripe-wolf references missing material id: mat-missing" in result.errors
