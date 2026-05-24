@@ -1,0 +1,14 @@
+id: eastern-wilds-known-entities
+indexed_entities:
+  - id: qinglan-frontier
+    type: region
+    description: A newly developed mountain frontier around Qinglan Ridge.
+  - id: qinglan-herb-market
+    type: market
+    description: A low-tier market used by gatherers, sect disciples, and small families.
+  - id: qinglan-demonwood-forest
+    type: wild_site
+    description: A dangerous forest with low-tier spirit herbs and frequent beast traces.
+  - id: neighboring-river-watch-sect
+    type: sect
+    description: An indexed neighboring sect; not materialized until touched.

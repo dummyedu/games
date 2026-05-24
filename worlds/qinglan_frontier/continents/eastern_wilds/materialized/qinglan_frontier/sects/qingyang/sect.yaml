@@ -1,0 +1,37 @@
+id: sect-qingyang
+name: Qingyang Sect
+type: sect
+state: materialized
+rank: golden_core_frontier_sect
+age_years_in_frontier: 68
+highest_known_power:
+  realm: golden_core
+  count: 1
+structure_summary:
+  foundation_establishment_elders: 8
+  inner_disciples: about_180
+  outer_disciples: about_1200
+  servant_workers: several_thousand
+orientation:
+  - frontier_development
+  - pill_supply
+  - herb_gathering
+  - outer_disciple_tasks
+materialized_facilities:
+  - facility-qingyang-outer-affairs-hall
+  - facility-qingyang-spirit-test-yard
+indexed_facilities:
+  - pill_hall
+  - scripture_pavilion
+  - mission_hall
+  - law_enforcement_hall
+  - practice_ground
+  - outer_residences
+rules:
+  outer_entry_requires_formal_spirit_root_test: true
+  outer_entry_grants_basic_technique: true
+  first_spell_must_match_root_element: true
+current_pressure:
+  - Frontier herb demand is high.
+  - Low-tier pill demand exceeds pill hall capacity.
+  - New outer disciples are encouraged to complete field tasks.

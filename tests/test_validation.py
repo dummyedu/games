@@ -263,3 +263,8 @@ def test_cli_validate_world_defaults_rulesets_root_from_worlds_parent(tmp_path: 
     captured = capsys.readouterr()
     assert exit_code == 0
     assert "valid" in captured.out
+
+
+def test_repository_seed_worlds_validate():
+    assert validate_world(Path("worlds/xuanyuan")).errors == []
+    assert validate_world(Path("worlds/qinglan_frontier")).errors == []

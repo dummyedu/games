@@ -1,0 +1,47 @@
+id: char-active-subject
+name: Active Subject
+state: active_subject
+identity:
+  current_status: pill_hall_servant_outer_entry_candidate
+  previous_role: pill_hall_servant
+  pending_status: outer_disciple
+true_state:
+  realm: qi_refining
+  layer: 1
+  cp: 40
+  current_layer_cp_required: 120
+  spiritual_root: single_element_heavenly_root
+  root_elements:
+    - fire
+  age: 16
+  lifespan_limit: 120
+  foundation: ordinary
+  pill_poison: 0
+  wounds: []
+cultivation_state:
+  rhythm: unstable
+  bottleneck: pending_outer_entry_resources
+combat:
+  mana_max: 45
+  mana_current: 45
+  life: 100
+  divine_sense: 8
+  attack: 12
+  defense: 8
+  speed: 10
+  control_resistance: 3
+  poison_resistance: 4
+  combat_experience: 0
+skills: {}
+equipment: []
+resources:
+  spirit_stones_low: 2
+  consumables: []
+knowledge:
+  known_facts:
+    - The active subject had a prior fire-root reaction in servant registration.
+    - Formal outer entry requires a spirit root retest.
+    - Fire spells and fire-control techniques should match the active subject if the retest confirms the root.
+  rumors: []
+relationships: {}
+event_history: []

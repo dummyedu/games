@@ -1,0 +1,30 @@
+id: index-entities
+entities:
+  char-active-subject:
+    type: character
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/characters/active_subject.yaml
+  sect-qingyang:
+    type: sect
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/sect.yaml
+  facility-qingyang-outer-affairs-hall:
+    type: facility
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/facilities/outer_affairs_hall.yaml
+  facility-qingyang-spirit-test-yard:
+    type: facility
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/facilities/spirit_test_yard.yaml
+  qinglan-herb-market:
+    type: market
+    state: indexed
+    path: null
+  qinglan-demonwood-forest:
+    type: wild_site
+    state: indexed
+    path: null
+  neighboring-river-watch-sect:
+    type: sect
+    state: indexed
+    path: null

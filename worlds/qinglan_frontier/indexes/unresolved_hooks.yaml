@@ -1,0 +1,18 @@
+id: index-unresolved-hooks
+hooks:
+  - id: hook-spirit-root-retest
+    source: world-seed
+    description: The active subject is about to receive a formal outer-sect spirit root retest.
+    related_entities:
+      - char-active-subject
+      - facility-qingyang-spirit-test-yard
+    priority: high
+    state: active
+  - id: hook-pill-hall-old-background
+    source: world-seed
+    description: The active subject was formerly a pill-hall servant; this creates background knowledge and relationships, but not a forced political mainline.
+    related_entities:
+      - char-active-subject
+      - sect-qingyang
+    priority: medium
+    state: latent

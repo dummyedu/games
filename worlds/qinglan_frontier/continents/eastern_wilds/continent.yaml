@@ -1,0 +1,8 @@
+id: cont-eastern-wilds
+name: Eastern Wilds
+state: indexed
+known_patterns:
+  - frontier_sects
+  - herb_gathering_routes
+  - scattered_cultivator_markets
+  - demon_beast_mountains

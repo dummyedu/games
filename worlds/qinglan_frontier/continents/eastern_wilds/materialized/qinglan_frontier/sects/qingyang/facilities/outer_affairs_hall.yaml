@@ -1,0 +1,18 @@
+id: facility-qingyang-outer-affairs-hall
+name: Outer Affairs Hall
+type: facility
+state: materialized
+owner: sect-qingyang
+functions:
+  - servant_to_outer_disciple_registration
+  - identity_token_distribution
+  - residence_assignment
+  - first_resource_record
+linked_facilities:
+  - facility-qingyang-spirit-test-yard
+current_scene:
+  description: The active subject is waiting to complete formal outer-sect entry procedures.
+event_hooks:
+  - first_identity_token
+  - first_resource_record
+  - outer_residence_assignment

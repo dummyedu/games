@@ -1,0 +1,26 @@
+id: facility-qingyang-spirit-test-yard
+name: Spirit Test Yard
+type: facility
+state: materialized
+owner: sect-qingyang
+functions:
+  - formal_spirit_root_retest
+  - root_element_registration
+  - outer_disciple_entry_verification
+temporary_people:
+  groups:
+    - same_batch_servant_candidates
+    - outer_affairs_clerks
+  simple_profiles:
+    - label: spirit_test_deacon
+      role: procedure_official
+      materialization: not_yet
+      note: Can be materialized if repeated interaction or conflict occurs.
+scene_state:
+  active_subject_stage: awaiting_formal_retest
+  known_previous_record: fire_root_reaction
+  expected_possible_result: single_element_heavenly_root_fire
+event_hooks:
+  - formal_fire_heavenly_root_confirmation
+  - first_outer_affairs_report
+  - same_batch_candidate_reactions

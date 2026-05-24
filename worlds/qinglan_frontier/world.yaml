@@ -1,0 +1,19 @@
+id: world-qinglan-frontier
+name: Qinglan Frontier
+ruleset: classic_xianxia
+current_time:
+  calendar: Qingyang
+  year: 73
+  season: spring
+  month: 2
+  day: 12
+active_subject: char-active-subject
+focus:
+  continent: cont-eastern-wilds
+  region: qinglan-frontier
+  place: facility-qingyang-outer-affairs-spirit-test-yard
+principles:
+  - claims_are_not_facts
+  - actions_change_truth
+  - subject_increases_event_resolution
+  - subject_intent_is_not_world_truth
