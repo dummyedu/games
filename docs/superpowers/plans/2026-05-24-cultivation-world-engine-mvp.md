@@ -10,6 +10,19 @@
 
 ---
 
+## Post-MVP Layout Update
+
+This plan was executed when the seed world still used a single `world/` directory. The current repository has since separated reusable rules from world saves:
+
+```text
+rulesets/classic_xianxia/
+worlds/xuanyuan/
+```
+
+For current work, use `README.md` and `docs/superpowers/specs/2026-05-24-cultivation-world-engine-design.md` as the source of truth for paths. The older `world/...` paths below are retained as execution history for the original MVP plan.
+
+---
+
 ## Scope Boundary
 
 This plan implements the first playable engine foundation from the approved spec at `docs/superpowers/specs/2026-05-24-cultivation-world-engine-design.md`.
