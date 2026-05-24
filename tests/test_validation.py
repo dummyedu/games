@@ -268,3 +268,60 @@ def test_cli_validate_world_defaults_rulesets_root_from_worlds_parent(tmp_path: 
 def test_repository_seed_worlds_validate():
     assert validate_world(Path("worlds/xuanyuan")).errors == []
     assert validate_world(Path("worlds/qinglan_frontier")).errors == []
+
+
+def test_validate_world_reports_unknown_local_action_type(tmp_path: Path):
+    write(
+        tmp_path / "rulesets/classic_xianxia/actions.yaml",
+        "id: rules-actions-v1\naction_types:\n  - travel\nrisk_levels:\n  - low\nauthority_ranks:\n  - outer_disciple\n",
+    )
+    write(
+        tmp_path / "rulesets/classic_xianxia/cultivation.yaml",
+        "id: rules-cultivation-v1\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/world.yaml",
+        "id: world-test\nactive_subject: char-a\nruleset: classic_xianxia\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/indexes/entities.yaml",
+        "id: index-entities\nentities:\n  char-a:\n    type: character\n    state: materialized\n    path: chars/a.yaml\n  sect-a:\n    type: sect\n    state: materialized\n    path: sects/a.yaml\n",
+    )
+    write(tmp_path / "worlds/xuanyuan/chars/a.yaml", "id: char-a\nname: A\n")
+    write(
+        tmp_path / "worlds/xuanyuan/sects/a.yaml",
+        "id: sect-a\naction_rules:\n  bad_rule:\n    type: forbidden_teleport\n",
+    )
+
+    result = validate_world(tmp_path / "worlds/xuanyuan")
+
+    assert "entity sect-a action rule bad_rule references unknown action type: forbidden_teleport" in result.errors
+
+
+def test_validate_world_reports_unknown_local_rank_and_target(tmp_path: Path):
+    write(
+        tmp_path / "rulesets/classic_xianxia/actions.yaml",
+        "id: rules-actions-v1\naction_types:\n  - travel\nrisk_levels:\n  - low\nauthority_ranks:\n  - outer_disciple\n",
+    )
+    write(
+        tmp_path / "rulesets/classic_xianxia/cultivation.yaml",
+        "id: rules-cultivation-v1\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/world.yaml",
+        "id: world-test\nactive_subject: char-a\nruleset: classic_xianxia\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/indexes/entities.yaml",
+        "id: index-entities\nentities:\n  char-a:\n    type: character\n    state: materialized\n    path: chars/a.yaml\n  sect-a:\n    type: sect\n    state: materialized\n    path: sects/a.yaml\n",
+    )
+    write(tmp_path / "worlds/xuanyuan/chars/a.yaml", "id: char-a\nname: A\n")
+    write(
+        tmp_path / "worlds/xuanyuan/sects/a.yaml",
+        "id: sect-a\naction_rules:\n  market:\n    type: travel\n    target: missing-market\n    minimum_rank: core_disciple\n",
+    )
+
+    result = validate_world(tmp_path / "worlds/xuanyuan")
+
+    assert "entity sect-a action rule market references unknown authority rank: core_disciple" in result.errors
+    assert "entity sect-a action rule market references unknown target: missing-market" in result.errors

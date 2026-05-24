@@ -39,6 +39,8 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
     content_ids: set[str] | None = None
     content_by_id: dict[str, dict[str, object]] = {}
     spiritual_root_ids: set[str] | None = None
+    action_types: set[str] | None = None
+    authority_ranks: set[str] | None = None
     if ruleset:
         root = rulesets_root or _default_rulesets_root(world_root)
         ruleset_path = root / str(ruleset)
@@ -48,6 +50,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
             content_by_id = _collect_content_by_id(ruleset_path)
             content_ids = set(content_by_id)
             spiritual_root_ids = _collect_spiritual_root_ids(ruleset_path)
+            action_types, authority_ranks = _collect_action_rule_ids(ruleset_path)
 
     for entity_id, entity in entities.items():
         if not isinstance(entity, dict):
@@ -81,6 +84,9 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
                 content_ids,
                 content_by_id,
                 spiritual_root_ids,
+                entities,
+                action_types,
+                authority_ranks,
                 errors,
             )
         elif state == "indexed":
@@ -135,6 +141,27 @@ def _collect_spiritual_root_ids(ruleset_path: Path) -> set[str]:
     return set()
 
 
+def _collect_action_rule_ids(ruleset_path: Path) -> tuple[set[str], set[str]]:
+    path = ruleset_path / "actions.yaml"
+    if not path.exists():
+        return set(), set()
+
+    try:
+        data = load_yaml(path)
+    except WorldDataError:
+        return set(), set()
+
+    action_types = data.get("action_types", [])
+    authority_ranks = data.get("authority_ranks", [])
+    return _string_set(action_types), _string_set(authority_ranks)
+
+
+def _string_set(value: object) -> set[str]:
+    if not isinstance(value, list):
+        return set()
+    return {item for item in value if isinstance(item, str)}
+
+
 def _validate_entity_ruleset_references(
     entity_id: str,
     entity_index: dict[str, object],
@@ -142,6 +169,9 @@ def _validate_entity_ruleset_references(
     content_ids: set[str] | None,
     content_by_id: dict[str, dict[str, object]],
     spiritual_root_ids: set[str] | None,
+    entities: dict[str, dict[str, object]],
+    action_types: set[str] | None,
+    authority_ranks: set[str] | None,
     errors: list[str],
 ) -> None:
     entity_type = entity_index.get("type")
@@ -188,6 +218,58 @@ def _validate_entity_ruleset_references(
             for content_id in inventory:
                 if content_id not in content_ids:
                     errors.append(f"facility {entity_id} references missing content id: {content_id}")
+
+    _validate_action_rules(
+        entity_id,
+        entity_data,
+        entities,
+        action_types,
+        authority_ranks,
+        errors,
+    )
+
+
+def _validate_action_rules(
+    entity_id: str,
+    entity_data: dict[str, object],
+    entities: dict[str, dict[str, object]],
+    action_types: set[str] | None,
+    authority_ranks: set[str] | None,
+    errors: list[str],
+) -> None:
+    action_rules = entity_data.get("action_rules", {})
+    if not isinstance(action_rules, dict):
+        return
+
+    for rule_id, rule in action_rules.items():
+        if not isinstance(rule_id, str) or not isinstance(rule, dict):
+            continue
+
+        rule_type = rule.get("type")
+        if (
+            action_types is not None
+            and isinstance(rule_type, str)
+            and rule_type not in action_types
+        ):
+            errors.append(
+                f"entity {entity_id} action rule {rule_id} references unknown action type: {rule_type}"
+            )
+
+        minimum_rank = rule.get("minimum_rank")
+        if (
+            authority_ranks is not None
+            and isinstance(minimum_rank, str)
+            and minimum_rank not in authority_ranks
+        ):
+            errors.append(
+                f"entity {entity_id} action rule {rule_id} references unknown authority rank: {minimum_rank}"
+            )
+
+        target = rule.get("target")
+        if isinstance(target, str) and target not in entities:
+            errors.append(
+                f"entity {entity_id} action rule {rule_id} references unknown target: {target}"
+            )
 
 
 def _validate_spell_element(
