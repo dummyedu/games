@@ -17,7 +17,7 @@ class ValidationResult:
         return not self.errors
 
 
-def validate_world(world_root: Path) -> ValidationResult:
+def validate_world(world_root: Path, rulesets_root: Path | None = None) -> ValidationResult:
     errors: list[str] = []
     warnings: list[str] = []
 
@@ -35,6 +35,12 @@ def validate_world(world_root: Path) -> ValidationResult:
     if active_subject and active_subject not in entities:
         errors.append(f"active_subject {active_subject} is not in entity index")
 
+    ruleset = world.get("ruleset")
+    if ruleset:
+        root = rulesets_root or world_root.parent / "rulesets"
+        if not (root / str(ruleset)).exists():
+            errors.append(f"ruleset {ruleset} does not exist")
+
     for entity_id, entity in entities.items():
         if not isinstance(entity, dict):
             errors.append(f"entity {entity_id} must be a mapping")
@@ -46,8 +52,9 @@ def validate_world(world_root: Path) -> ValidationResult:
             if not path_value:
                 errors.append(f"materialized entity {entity_id} has no path")
                 continue
-            path = world_root.parent / str(path_value)
-            if not path.exists():
+            world_relative_path = world_root / str(path_value)
+            legacy_path = world_root.parent / str(path_value)
+            if not world_relative_path.exists() and not legacy_path.exists():
                 errors.append(f"materialized entity {entity_id} path does not exist: {path_value}")
         elif state == "indexed":
             if path_value is not None:

@@ -13,6 +13,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate = subparsers.add_parser("validate", help="validate a world directory")
     validate.add_argument("world_root", type=Path)
+    validate.add_argument("--rulesets-root", type=Path, default=None)
 
     return parser
 
@@ -22,7 +23,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "validate":
-        result = validate_world(args.world_root)
+        result = validate_world(args.world_root, rulesets_root=args.rulesets_root)
         if result.ok:
             print(f"valid: {args.world_root}")
             for warning in result.warnings:

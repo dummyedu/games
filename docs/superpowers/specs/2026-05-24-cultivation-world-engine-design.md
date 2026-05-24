@@ -58,9 +58,8 @@ When the subject leaves a major area and no important viewpoint remains there, t
 Suggested top-level structure:
 
 ```text
-world/
-  world.yaml
-  rules/
+rulesets/
+  classic_xianxia/
     cultivation.yaml
     breakthroughs.yaml
     events.yaml
@@ -72,17 +71,30 @@ world/
       consumables/
       talismans/
       status_effects/
-  indexes/
-    entities.yaml
-    active_subjects.yaml
-    unresolved_hooks.yaml
-    timeline.yaml
-  continents/
-  subjects/
-  storylines/
-  events/
-  scripts/
+worlds/
+  xuanyuan/
+    world.yaml
+    indexes/
+      entities.yaml
+      active_subjects.yaml
+      unresolved_hooks.yaml
+      timeline.yaml
+    continents/
+    subjects/
+    storylines/
+    events/
+scripts/
 ```
+
+Rulesets are reusable. A world save declares which ruleset it uses:
+
+```yaml
+id: world-xuanyuan
+name: Xuanyuan Realm
+ruleset: classic_xianxia
+```
+
+The same ruleset can run multiple worlds. World data stores current time, active subject, materialized entities, events, history, relationships, and knowledge. Ruleset data stores shared cultivation physics, breakthrough logic, content definitions, status effects, and combat content.
 
 Character files store true state, cultivation state, resources, skills, subjective knowledge, relationships, and event history.
 
@@ -340,6 +352,12 @@ Useful first-version scripts:
 - thaw-region: prepare return progression checklist
 
 Scripts output calculations, warnings, and structured results. The LLM writes narrative events and state updates based on those results. The developer may intervene when the LLM mishandles causality or stability.
+
+Validation commands should take both a world save and ruleset root:
+
+```bash
+world-engine validate worlds/xuanyuan --rulesets-root rulesets
+```
 
 ## First Implementation Scope
 

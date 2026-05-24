@@ -1,5 +1,6 @@
 id: world-xuanyuan
 name: Xuanyuan Realm
+ruleset: classic_xianxia
 current_time:
   calendar: Xuanyuan
   year: 102
