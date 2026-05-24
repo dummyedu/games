@@ -69,3 +69,68 @@ def _category_from_relative_strength(rules: dict[str, Any], relative_strength: f
     if relative_strength <= float(thresholds["dangerous_max"]):
         return "dangerous"
     return "life_threatening"
+
+
+@dataclass(frozen=True)
+class HarvestContext:
+    corpse_not_burned: bool
+    harvested_within_hours: int
+    extraction_skill: str
+
+
+@dataclass(frozen=True)
+class MaterialHarvestResult:
+    obtained_material_ids: list[str]
+    failed_material_ids: list[str]
+
+
+def calculate_material_harvest(
+    beast_template: dict[str, Any],
+    *,
+    beast_layer: int,
+    context: HarvestContext,
+    rolls: dict[str, float],
+) -> MaterialHarvestResult:
+    obtained: list[str] = []
+    failed: list[str] = []
+    materials = beast_template.get("materials", [])
+    if not isinstance(materials, list):
+        return MaterialHarvestResult(obtained_material_ids=[], failed_material_ids=[])
+
+    for material in materials:
+        if not isinstance(material, dict):
+            continue
+        material_id = material["id"]
+        chance = float(material["chance"])
+        roll = rolls.get(material_id)
+        if roll is None:
+            raise ValueError(f"missing harvest roll for material: {material_id}")
+
+        if _requirements_met(material.get("condition_requirements", {}), beast_layer, context) and roll <= chance:
+            obtained.append(material_id)
+        else:
+            failed.append(material_id)
+
+    return MaterialHarvestResult(obtained_material_ids=obtained, failed_material_ids=failed)
+
+
+def _requirements_met(
+    requirements: object,
+    beast_layer: int,
+    context: HarvestContext,
+) -> bool:
+    if not isinstance(requirements, dict):
+        return True
+
+    if requirements.get("corpse_not_burned") is True and not context.corpse_not_burned:
+        return False
+
+    harvested_limit = requirements.get("harvested_within_hours")
+    if isinstance(harvested_limit, int) and context.harvested_within_hours > harvested_limit:
+        return False
+
+    layer_min = requirements.get("layer_min")
+    if isinstance(layer_min, int) and beast_layer < layer_min:
+        return False
+
+    return True
