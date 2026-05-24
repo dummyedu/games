@@ -124,3 +124,93 @@ def _as_mapping(value: object) -> dict[str, Any]:
     if not isinstance(value, dict):
         return {}
     return {str(key): item for key, item in value.items()}
+
+
+def resolve_action_permission(
+    subject: dict[str, Any],
+    action: ActionRequest,
+    rules: dict[str, Any],
+) -> ActionPermissionResult:
+    if action.type == "travel" and action.target_id == "qinglan-herb-market":
+        return _resolve_qinglan_market_travel(subject, rules)
+    if action.type == "audience" and "ancestor" in action.target_id:
+        return _resolve_ancestor_audience(rules)
+    if action.type == "speech_claim":
+        return ActionPermissionResult(
+            status="allowed_with_risk",
+            reason="The subject can make the claim, but speech does not alter world truth.",
+            cost={"time_days": 0, "spirit_stones_low": 0},
+            risk={"level": "medium", "tags": ["false_claim", "sect_law", "reputation"]},
+            required_steps=[],
+            consequences=[
+                "Witnesses may doubt, mock, report, or test the claim.",
+                "Law enforcement risk increases if the claim concerns high authority.",
+            ],
+        )
+    return ActionPermissionResult(
+        status="impossible_now",
+        reason=f"No action permission rule is available for {action.type} targeting {action.target_id}.",
+        cost={"time_days": 0, "spirit_stones_low": 0},
+        risk={"level": "none", "tags": []},
+        required_steps=[],
+        consequences=[],
+    )
+
+
+def _resolve_qinglan_market_travel(
+    subject: dict[str, Any],
+    rules: dict[str, Any],
+) -> ActionPermissionResult:
+    market_rule = rules["local_rules"]["sect-qingyang"]["market_travel"]
+    distance = rules["distance_bands"][market_rule["distance_band"]]
+    tags = list(market_rule.get("risk_tags", []))
+    reason = str(market_rule["base_reason"])
+
+    if _is_newly_confirmed_heavenly_root(subject):
+        extra = market_rule["extra_risk_if"]["newly_confirmed_heavenly_root"]
+        tags.extend(extra.get("tags", []))
+        reason = (
+            "Outer disciples can make short market trips, but this subject is newly notable "
+            "after heavenly fire root confirmation."
+        )
+
+    return ActionPermissionResult(
+        status=str(market_rule["status"]),
+        reason=reason,
+        cost={
+            "time_days": float(distance["base_time_days"]),
+            "spirit_stones_low": 0,
+        },
+        risk={"level": str(distance["base_risk"]), "tags": tags},
+        required_steps=[],
+        consequences=[
+            "The market can be materialized if the subject goes.",
+            "Same-batch candidates or pill-hall contacts may learn of the trip.",
+        ],
+    )
+
+
+def _resolve_ancestor_audience(rules: dict[str, Any]) -> ActionPermissionResult:
+    rule = rules["local_rules"]["sect-qingyang"]["ancestor_audience"]
+    return ActionPermissionResult(
+        status=str(rule["status"]),
+        reason=str(rule["base_reason"]),
+        cost={"time_days": 0, "spirit_stones_low": 0},
+        risk={"level": str(rule["risk_level"]), "tags": list(rule["risk_tags"])},
+        required_steps=list(rule["required_steps"]),
+        consequences=["A crude direct demand may be recorded as arrogance or ignorance."],
+    )
+
+
+def _is_newly_confirmed_heavenly_root(subject: dict[str, Any]) -> bool:
+    true_state = subject.get("true_state", {})
+    knowledge = subject.get("knowledge", {})
+    known_facts = knowledge.get("known_facts", []) if isinstance(knowledge, dict) else []
+    return (
+        isinstance(true_state, dict)
+        and true_state.get("spiritual_root") == "single_element_heavenly_root"
+        and any(
+            isinstance(fact, str) and "confirmed a single-element heavenly fire root" in fact
+            for fact in known_facts
+        )
+    )

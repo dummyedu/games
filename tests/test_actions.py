@@ -5,7 +5,7 @@ from world_engine.actions import (
 )
 from pathlib import Path
 
-from world_engine.actions import load_action_rules
+from world_engine.actions import load_action_rules, resolve_action_permission
 
 
 def test_classify_player_mode_by_default():
@@ -72,3 +72,62 @@ def test_load_action_rules_reads_ruleset_and_local_sect_rules():
         rules["local_rules"]["sect-qingyang"]["ancestor_audience"]["target_rank"]
         == "ancestor"
     )
+
+
+def test_market_travel_for_new_heavenly_root_outer_disciple_is_allowed_with_attention_risk():
+    rules = load_action_rules(Path("worlds/qinglan_frontier"))
+    subject = {
+        "id": "char-active-subject",
+        "identity": {"current_status": "outer_disciple"},
+        "true_state": {"spiritual_root": "single_element_heavenly_root"},
+        "knowledge": {
+            "known_facts": [
+                "The formal retest confirmed a single-element heavenly fire root."
+            ]
+        },
+    }
+    request = ActionRequest(
+        type="travel",
+        actor_id="char-active-subject",
+        target_id="qinglan-herb-market",
+        declared_intent="去集市买东西",
+        current_place="facility-qingyang-outer-affairs-hall",
+    )
+
+    result = resolve_action_permission(subject, request, rules)
+
+    assert result.status == "allowed_with_risk"
+    assert result.cost == {"time_days": 0.5, "spirit_stones_low": 0}
+    assert result.risk["level"] == "low"
+    assert result.risk["tags"] == ["travel", "market_exposure", "attention"]
+    assert "newly notable" in result.reason
+    assert "market can be materialized" in result.consequences[0]
+
+
+def test_direct_ancestor_audience_requires_intermediate_steps():
+    rules = load_action_rules(Path("worlds/qinglan_frontier"))
+    subject = {
+        "id": "char-active-subject",
+        "identity": {"current_status": "outer_disciple"},
+        "true_state": {"spiritual_root": "single_element_heavenly_root"},
+        "knowledge": {"known_facts": []},
+    }
+    request = ActionRequest(
+        type="audience",
+        actor_id="char-active-subject",
+        target_id="sect-qingyang-golden-core-ancestor",
+        declared_intent="我要见金丹老祖",
+        current_place="facility-qingyang-outer-affairs-hall",
+    )
+
+    result = resolve_action_permission(subject, request, rules)
+
+    assert result.status == "requires_intermediate"
+    assert result.risk == {"level": "low", "tags": ["social_overreach"]}
+    assert result.required_steps == [
+        "request advice from a deacon",
+        "gain elder sponsorship",
+        "earn major sect merit",
+        "receive direct summons",
+    ]
+    assert "no direct audience right" in result.reason
