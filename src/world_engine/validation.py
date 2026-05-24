@@ -38,6 +38,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
     ruleset = world.get("ruleset")
     content_ids: set[str] | None = None
     content_by_id: dict[str, dict[str, object]] = {}
+    beast_templates: dict[str, dict[str, object]] = {}
     spiritual_root_ids: set[str] | None = None
     action_types: set[str] | None = None
     authority_ranks: set[str] | None = None
@@ -48,6 +49,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
             errors.append(f"ruleset {ruleset} does not exist")
         else:
             content_by_id = _collect_content_by_id(ruleset_path)
+            beast_templates = _collect_beast_templates(ruleset_path)
             content_ids = set(content_by_id)
             spiritual_root_ids = _collect_spiritual_root_ids(ruleset_path)
             action_types, authority_ranks = _collect_action_rule_ids(ruleset_path)
@@ -87,6 +89,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
                 entities,
                 action_types,
                 authority_ranks,
+                beast_templates,
                 errors,
             )
         elif state == "indexed":
@@ -123,6 +126,23 @@ def _collect_content_by_id(ruleset_path: Path) -> dict[str, dict[str, object]]:
         if isinstance(content_id, str):
             content_by_id[content_id] = data
     return content_by_id
+
+
+def _collect_beast_templates(ruleset_path: Path) -> dict[str, dict[str, object]]:
+    beast_root = ruleset_path / "content" / "beasts"
+    if not beast_root.exists():
+        return {}
+
+    templates: dict[str, dict[str, object]] = {}
+    for path in beast_root.rglob("*.yaml"):
+        try:
+            data = load_yaml(path)
+        except WorldDataError:
+            continue
+        beast_id = data.get("id")
+        if isinstance(beast_id, str):
+            templates[beast_id] = data
+    return templates
 
 
 def _collect_spiritual_root_ids(ruleset_path: Path) -> set[str]:
@@ -172,6 +192,7 @@ def _validate_entity_ruleset_references(
     entities: dict[str, dict[str, object]],
     action_types: set[str] | None,
     authority_ranks: set[str] | None,
+    beast_templates: dict[str, dict[str, object]],
     errors: list[str],
 ) -> None:
     entity_type = entity_index.get("type")
@@ -227,6 +248,61 @@ def _validate_entity_ruleset_references(
         authority_ranks,
         errors,
     )
+
+    if entity_type == "beast":
+        _validate_beast_instance(entity_id, entity_data, beast_templates, errors)
+
+
+def _validate_beast_instance(
+    entity_id: str,
+    entity_data: dict[str, object],
+    beast_templates: dict[str, dict[str, object]],
+    errors: list[str],
+) -> None:
+    template_id = entity_data.get("template")
+    if not isinstance(template_id, str):
+        errors.append(f"beast {entity_id} has no template")
+        return
+
+    template = beast_templates.get(template_id)
+    if template is None:
+        errors.append(f"beast {entity_id} references missing beast template: {template_id}")
+        return
+
+    variant = entity_data.get("variant")
+    variants = template.get("variants", {})
+    if not isinstance(variant, str) or not isinstance(variants, dict) or variant not in variants:
+        errors.append(f"beast {entity_id} references missing variant: {variant}")
+        return
+
+    variant_data = variants[variant]
+    if isinstance(variant_data, dict):
+        _validate_beast_layer(entity_id, entity_data, variant, variant_data, errors)
+
+    generation = entity_data.get("generation", {})
+    rolls = generation.get("rolls", {}) if isinstance(generation, dict) else {}
+    if isinstance(rolls, dict):
+        for key, value in rolls.items():
+            if isinstance(value, int | float) and (value < 0.9 or value > 1.1):
+                errors.append(f"beast {entity_id} generation roll {key} out of range: {value}")
+
+
+def _validate_beast_layer(
+    entity_id: str,
+    entity_data: dict[str, object],
+    variant: str,
+    variant_data: dict[str, object],
+    errors: list[str],
+) -> None:
+    layer = entity_data.get("layer")
+    layer_range = variant_data.get("layer_range")
+    if not isinstance(layer, int) or not isinstance(layer_range, list) or len(layer_range) != 2:
+        return
+    layer_min, layer_max = layer_range
+    if not isinstance(layer_min, int) or not isinstance(layer_max, int):
+        return
+    if layer < layer_min or layer > layer_max:
+        errors.append(f"beast {entity_id} layer {layer} is outside variant {variant} range: {layer_min}-{layer_max}")
 
 
 def _validate_action_rules(

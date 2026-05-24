@@ -325,3 +325,52 @@ def test_validate_world_reports_unknown_local_rank_and_target(tmp_path: Path):
 
     assert "entity sect-a action rule market references unknown authority rank: core_disciple" in result.errors
     assert "entity sect-a action rule market references unknown target: missing-market" in result.errors
+
+
+def test_validate_world_reports_beast_instance_unknown_template(tmp_path: Path):
+    write(tmp_path / "rulesets/classic_xianxia/cultivation.yaml", "id: rules-cultivation-v1\n")
+    write(tmp_path / "rulesets/classic_xianxia/actions.yaml", "id: rules-actions-v1\n")
+    write(
+        tmp_path / "worlds/xuanyuan/world.yaml",
+        "id: world-test\nactive_subject: char-a\nruleset: classic_xianxia\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/indexes/entities.yaml",
+        "id: index-entities\nentities:\n  char-a:\n    type: character\n    state: materialized\n    path: chars/a.yaml\n  beast-a:\n    type: beast\n    state: materialized\n    path: beasts/a.yaml\n",
+    )
+    write(tmp_path / "worlds/xuanyuan/chars/a.yaml", "id: char-a\nname: A\n")
+    write(
+        tmp_path / "worlds/xuanyuan/beasts/a.yaml",
+        "id: beast-a\ntemplate: beast-missing\nvariant: adult\nlayer: 3\ngeneration:\n  rolls:\n    life_multiplier: 1.0\n",
+    )
+
+    result = validate_world(tmp_path / "worlds/xuanyuan")
+
+    assert "beast beast-a references missing beast template: beast-missing" in result.errors
+
+
+def test_validate_world_reports_beast_instance_bad_variant_layer_and_roll(tmp_path: Path):
+    write(tmp_path / "rulesets/classic_xianxia/cultivation.yaml", "id: rules-cultivation-v1\n")
+    write(tmp_path / "rulesets/classic_xianxia/actions.yaml", "id: rules-actions-v1\n")
+    write(
+        tmp_path / "rulesets/classic_xianxia/content/beasts/firestripe_wolf.yaml",
+        "id: beast-firestripe-wolf\ntype: beast\nvariants:\n  juvenile:\n    layer_range: [1, 2]\nmaterials: []\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/world.yaml",
+        "id: world-test\nactive_subject: char-a\nruleset: classic_xianxia\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/indexes/entities.yaml",
+        "id: index-entities\nentities:\n  char-a:\n    type: character\n    state: materialized\n    path: chars/a.yaml\n  beast-a:\n    type: beast\n    state: materialized\n    path: beasts/a.yaml\n",
+    )
+    write(tmp_path / "worlds/xuanyuan/chars/a.yaml", "id: char-a\nname: A\n")
+    write(
+        tmp_path / "worlds/xuanyuan/beasts/a.yaml",
+        "id: beast-a\ntemplate: beast-firestripe-wolf\nvariant: juvenile\nlayer: 4\ngeneration:\n  rolls:\n    life_multiplier: 1.2\n",
+    )
+
+    result = validate_world(tmp_path / "worlds/xuanyuan")
+
+    assert "beast beast-a layer 4 is outside variant juvenile range: 1-2" in result.errors
+    assert "beast beast-a generation roll life_multiplier out of range: 1.2" in result.errors
