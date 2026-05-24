@@ -1,0 +1,7 @@
+id: cont-tiannan
+name: Tiannan Continent
+state: partially_indexed
+known_patterns:
+  - orthodox_sects
+  - demonic_sects
+  - scattered_cultivator_markets

@@ -1,0 +1,6 @@
+id: status-mana-exhaustion
+name: Mana Exhaustion
+type: resource_state
+modifiers:
+  attack_multiplier: 0.7
+  speed_multiplier: 0.8

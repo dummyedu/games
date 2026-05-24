@@ -1,0 +1,35 @@
+id: rules-cultivation-v1
+talents:
+  poor_spiritual_root:
+    daily_cp: 0.5
+  middle_spiritual_root:
+    daily_cp: 1.0
+  superior_spiritual_root:
+    daily_cp: 1.5
+  excellent_spiritual_root:
+    daily_cp: 2.0
+  heavenly_spiritual_root:
+    daily_cp: 3.0
+qi_refining_thresholds:
+  layer_1_to_2: 120
+  layer_2_to_3: 240
+  layer_3_to_4: 480
+  layer_4_to_5: 900
+  layer_5_to_6: 1400
+  layer_6_to_7: 2200
+  layer_7_to_8: 3300
+  layer_8_to_9: 5000
+  layer_9_to_perfection: 4000
+cultivation_states:
+  not_cultivating:
+    monthly_cp_min: 0
+    monthly_cp_max: 0
+  occasional:
+    monthly_cp_min: 1
+    monthly_cp_max: 10
+  stable:
+    monthly_cp_min: 20
+    monthly_cp_max: 60
+  key_target:
+    monthly_cp_min: 60
+    monthly_cp_max: 150

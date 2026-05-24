@@ -1,0 +1,10 @@
+id: cons-ordinary-qi-gathering-pill
+name: Ordinary Qi Gathering Pill
+type: pill
+effects:
+  cp: 20
+  refine_days: 3
+side_effects:
+  pill_poison: 1
+limits:
+  repeat_window_days: 10

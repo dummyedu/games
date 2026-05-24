@@ -1,0 +1,29 @@
+id: rules-breakthroughs-v1
+foundation_establishment:
+  base_success: 20
+  cap: 95
+  floor: 5
+  modifiers:
+    foundation_pill: 35
+    superior_foundation_pill: 45
+    spiritual_site_low: 5
+    spiritual_site_good: 15
+    complete_matching_technique: 10
+    solid_foundation: 10
+    stable_mind: 10
+    elder_protection: 10
+    visible_pill_poison: -20
+    hidden_wound: -20
+    severe_wound: -40
+    old_age_pressure: -10
+    forced_breakthrough: -30
+failure_bands:
+  light:
+    over_by_min: 1
+    over_by_max: 20
+  medium:
+    over_by_min: 21
+    over_by_max: 50
+  severe:
+    over_by_min: 51
+    over_by_max: 100

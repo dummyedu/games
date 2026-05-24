@@ -1,0 +1,15 @@
+id: relation-scene-qingyun-outer-room-c3
+type: residence_relationship_scene
+place: sect-qingyun-outer-room-c3
+members:
+  - char-lin-xuan
+  - char-zhao-shi
+contact_frequency: high
+relationship_network:
+  char-lin-xuan__char-zhao-shi:
+    surface_relation: roommate
+    default_interaction: morning_class_and_evening_room_contact
+event_hooks:
+  - night_talk_about_outer_rules
+  - missing_pill_suspicion
+history: []

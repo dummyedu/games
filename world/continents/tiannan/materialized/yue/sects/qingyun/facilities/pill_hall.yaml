@@ -1,0 +1,18 @@
+id: facility-qingyun-pill-hall
+name: Pill Hall
+type: facility
+state: materialized
+owner: sect-qingyun
+inventory:
+  cons-ordinary-qi-gathering-pill: 120
+staff_summary:
+  alchemy_apprentices: 12
+  delivery_servants: 6
+rules:
+  - Outer disciples may exchange for one ordinary qi gathering pill per month.
+conflicts:
+  - Outer disciples suspect allowance skimming.
+event_hooks:
+  - pill_theft
+  - herb_shortage
+  - steward_bribe

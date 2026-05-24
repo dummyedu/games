@@ -1,0 +1,6 @@
+id: status-light-wound
+name: Light Wound
+type: injury
+modifiers:
+  attack_multiplier: 0.95
+  speed_multiplier: 0.95

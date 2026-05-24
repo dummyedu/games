@@ -1,0 +1,22 @@
+id: index-entities
+entities:
+  char-lin-xuan:
+    type: character
+    state: materialized
+    path: world/continents/tiannan/materialized/yue/sects/qingyun/characters/lin_xuan.yaml
+  char-zhao-shi:
+    type: character
+    state: materialized
+    path: world/continents/tiannan/materialized/yue/sects/qingyun/characters/zhao_shi.yaml
+  sect-qingyun:
+    type: sect
+    state: materialized
+    path: world/continents/tiannan/materialized/yue/sects/qingyun/sect.yaml
+  facility-qingyun-pill-hall:
+    type: facility
+    state: materialized
+    path: world/continents/tiannan/materialized/yue/sects/qingyun/facilities/pill_hall.yaml
+  magic-six-sects:
+    type: alliance
+    state: indexed
+    path: null

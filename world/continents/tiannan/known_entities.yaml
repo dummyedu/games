@@ -1,0 +1,8 @@
+id: tiannan-known-entities
+indexed_entities:
+  - id: yue-cultivation-region
+    type: region
+    description: Local cultivation region around Yue.
+  - id: magic-six-sects
+    type: alliance
+    description: Indexed but not materialized demonic alliance.

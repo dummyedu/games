@@ -1,0 +1,13 @@
+id: sect-qingyun
+name: Qingyun Sect
+type: sect
+state: materialized
+rank: foundation_establishment_sect
+facilities:
+  - facility-qingyun-pill-hall
+characters:
+  - char-lin-xuan
+  - char-zhao-shi
+rules:
+  outer_disciple_monthly_allowance:
+    ordinary_qi_gathering_pill: 1

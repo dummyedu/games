@@ -1,0 +1,49 @@
+id: char-lin-xuan
+name: Lin Xuan
+state: active_subject
+true_state:
+  realm: qi_refining
+  layer: 3
+  cp: 430
+  current_layer_cp_required: 480
+  spiritual_root: middle_spiritual_root
+  age: 17
+  lifespan_limit: 120
+  foundation: ordinary
+  pill_poison: 0
+  wounds: []
+cultivation_state:
+  rhythm: stable
+  bottleneck: null
+combat:
+  mana_max: 120
+  mana_current: 120
+  life: 100
+  divine_sense: 20
+  attack: 35
+  defense: 20
+  speed: 25
+  control_resistance: 10
+  poison_resistance: 5
+  combat_experience: 12
+skills:
+  spell-fireball-1:
+    source: Qingyun library
+    completeness: complete
+    stage: practiced
+    sp: 420
+equipment:
+  - equip-low-grade-flying-sword
+resources:
+  spirit_stones_low: 23
+  consumables: []
+knowledge:
+  known_facts:
+    - Qingyun outer disciples can receive one ordinary qi gathering pill per month.
+  rumors: []
+relationships:
+  char-zhao-shi:
+    type: roommate
+    trust: 35
+    belief: Honest but timid.
+event_history: []

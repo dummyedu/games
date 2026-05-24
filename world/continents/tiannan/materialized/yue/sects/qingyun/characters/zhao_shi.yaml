@@ -1,0 +1,42 @@
+id: char-zhao-shi
+name: Zhao Shi
+state: standard_character
+true_state:
+  realm: qi_refining
+  layer: 2
+  cp: 160
+  current_layer_cp_required: 240
+  spiritual_root: poor_spiritual_root
+  age: 19
+  lifespan_limit: 110
+  foundation: ordinary
+  pill_poison: 0
+  wounds: []
+cultivation_state:
+  rhythm: occasional
+  bottleneck: resources
+combat:
+  mana_max: 85
+  mana_current: 85
+  life: 100
+  divine_sense: 12
+  attack: 22
+  defense: 15
+  speed: 18
+  control_resistance: 6
+  poison_resistance: 4
+  combat_experience: 4
+skills: {}
+equipment: []
+resources:
+  spirit_stones_low: 4
+  consumables: []
+knowledge:
+  known_facts: []
+  rumors: []
+relationships:
+  char-lin-xuan:
+    type: roommate
+    trust: 55
+    belief: Quiet but reliable.
+event_history: []

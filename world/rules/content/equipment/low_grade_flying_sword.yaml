@@ -1,0 +1,9 @@
+id: equip-low-grade-flying-sword
+name: Low-grade Flying Sword
+grade: low_grade_artifact
+slot: weapon
+bonuses:
+  attack: 18
+  speed: 3
+traits:
+  melee_penetration: 5

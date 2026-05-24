@@ -1,0 +1,9 @@
+id: equip-ironwood-shield
+name: Ironwood Shield
+grade: low_grade_artifact
+slot: offhand
+bonuses:
+  defense: 12
+traits:
+  active_shield: 25
+  mana_cost: 5

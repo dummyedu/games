@@ -1,0 +1,17 @@
+id: world-xuanyuan
+name: Xuanyuan Realm
+current_time:
+  calendar: Xuanyuan
+  year: 102
+  season: spring
+  month: 3
+  day: 7
+active_subject: char-lin-xuan
+focus:
+  continent: cont-tiannan
+  region: yue-cultivation-region
+  place: sect-qingyun-outer
+principles:
+  - claims_are_not_facts
+  - actions_change_truth
+  - subject_increases_event_resolution
