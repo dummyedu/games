@@ -75,3 +75,52 @@ def classify_interaction_mode(user_text: str) -> str:
     if any(marker in normalized for marker in AUTHOR_PROJECT_MARKERS):
         return "author_project"
     return "player"
+
+
+def load_action_rules(world_root: Path, rulesets_root: Path | None = None) -> dict[str, Any]:
+    world = load_yaml(world_root / "world.yaml")
+    ruleset = world.get("ruleset")
+    if not isinstance(ruleset, str):
+        raise ValueError(f"world has no ruleset: {world_root}")
+
+    root = rulesets_root or _default_rulesets_root(world_root)
+    ruleset_rules = load_yaml(root / ruleset / "actions.yaml")
+    local_rules = _load_local_action_rules(world_root)
+    return {
+        "action_types": _as_list(ruleset_rules.get("action_types")),
+        "distance_bands": _as_mapping(ruleset_rules.get("distance_bands")),
+        "risk_levels": _as_list(ruleset_rules.get("risk_levels")),
+        "authority_ranks": _as_list(ruleset_rules.get("authority_ranks")),
+        "common_blockers": _as_list(ruleset_rules.get("common_blockers")),
+        "outcomes": _as_list(ruleset_rules.get("outcomes")),
+        "local_rules": local_rules,
+    }
+
+
+def _default_rulesets_root(world_root: Path) -> Path:
+    if world_root.parent.name == "worlds":
+        return world_root.parent.parent / "rulesets"
+    return world_root.parent / "rulesets"
+
+
+def _load_local_action_rules(world_root: Path) -> dict[str, dict[str, Any]]:
+    local_rules: dict[str, dict[str, Any]] = {}
+    for path in world_root.rglob("*.yaml"):
+        data = load_yaml(path)
+        entity_id = data.get("id")
+        action_rules = data.get("action_rules")
+        if isinstance(entity_id, str) and isinstance(action_rules, dict):
+            local_rules[entity_id] = action_rules
+    return local_rules
+
+
+def _as_list(value: object) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [item for item in value if isinstance(item, str)]
+
+
+def _as_mapping(value: object) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        return {}
+    return {str(key): item for key, item in value.items()}

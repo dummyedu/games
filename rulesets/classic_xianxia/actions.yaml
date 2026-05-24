@@ -1,0 +1,52 @@
+id: rules-actions-v1
+action_types:
+  - travel
+  - audience
+  - purchase
+  - training
+  - sect_procedure
+  - restricted_entry
+  - speech_claim
+distance_bands:
+  same_facility:
+    base_time_days: 0
+    base_risk: none
+  same_sect:
+    base_time_days: 0.1
+    base_risk: none
+  near_market:
+    base_time_days: 0.5
+    base_risk: low
+  wilderness:
+    base_time_days: 1
+    base_risk: medium
+  remote_region:
+    base_time_days: 10
+    base_risk: high
+risk_levels:
+  - none
+  - low
+  - medium
+  - high
+  - deadly
+authority_ranks:
+  - servant
+  - outer_disciple
+  - inner_disciple
+  - deacon
+  - elder
+  - sect_master
+  - ancestor
+common_blockers:
+  - insufficient_rank
+  - missing_permission
+  - closed_area
+  - time_pressure
+  - unknown_route
+  - hostile_zone
+outcomes:
+  - allowed
+  - allowed_with_risk
+  - requires_intermediate
+  - blocked
+  - impossible_now

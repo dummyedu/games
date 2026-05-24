@@ -31,6 +31,37 @@ rules:
   outer_entry_requires_formal_spirit_root_test: true
   outer_entry_grants_basic_technique: true
   first_spell_must_match_root_element: true
+action_rules:
+  market_travel:
+    type: travel
+    target: qinglan-herb-market
+    minimum_rank: outer_disciple
+    distance_band: near_market
+    status: allowed_with_risk
+    base_reason: Outer disciples can make short trips to Qinglan Herb Market unless confined, assigned urgent duty, or directly ordered to remain.
+    risk_tags:
+      - travel
+      - market_exposure
+    extra_risk_if:
+      newly_confirmed_heavenly_root:
+        risk_level: low
+        tags:
+          - attention
+        reason: The subject was just confirmed as a heavenly fire root and may be noticed outside the sect.
+  ancestor_audience:
+    type: audience
+    target_rank: ancestor
+    minimum_rank: elder
+    status: requires_intermediate
+    base_reason: A new outer disciple has no direct audience right with the Golden Core ancestor.
+    risk_level: low
+    risk_tags:
+      - social_overreach
+    required_steps:
+      - request advice from a deacon
+      - gain elder sponsorship
+      - earn major sect merit
+      - receive direct summons
 current_pressure:
   - Frontier herb demand is high.
   - Low-tier pill demand exceeds pill hall capacity.

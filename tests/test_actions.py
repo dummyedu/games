@@ -3,6 +3,9 @@ from world_engine.actions import (
     ActionRequest,
     classify_interaction_mode,
 )
+from pathlib import Path
+
+from world_engine.actions import load_action_rules
 
 
 def test_classify_player_mode_by_default():
@@ -56,3 +59,16 @@ def test_action_request_and_result_to_dict_are_stable():
         "required_steps": [],
         "consequences": ["The market can be materialized."],
     }
+
+
+def test_load_action_rules_reads_ruleset_and_local_sect_rules():
+    rules = load_action_rules(Path("worlds/qinglan_frontier"))
+
+    assert "travel" in rules["action_types"]
+    assert "near_market" in rules["distance_bands"]
+    assert "outer_disciple" in rules["authority_ranks"]
+    assert rules["local_rules"]["sect-qingyang"]["market_travel"]["target"] == "qinglan-herb-market"
+    assert (
+        rules["local_rules"]["sect-qingyang"]["ancestor_audience"]["target_rank"]
+        == "ancestor"
+    )
