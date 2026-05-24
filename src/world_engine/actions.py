@@ -163,6 +163,18 @@ def _resolve_qinglan_market_travel(
 ) -> ActionPermissionResult:
     market_rule = rules["local_rules"]["sect-qingyang"]["market_travel"]
     distance = rules["distance_bands"][market_rule["distance_band"]]
+    minimum_rank = str(market_rule.get("minimum_rank", "outer_disciple"))
+    current_rank = _subject_authority_rank(subject)
+    if not _rank_at_least(current_rank, minimum_rank, rules):
+        return ActionPermissionResult(
+            status="requires_intermediate",
+            reason="The subject must complete outer-disciple registration before making sect-sanctioned market trips.",
+            cost={"time_days": 0, "spirit_stones_low": 0},
+            risk={"level": "none", "tags": []},
+            required_steps=["complete outer-disciple registration at Outer Affairs Hall"],
+            consequences=["Attempting to leave before registration may be refused or recorded."],
+        )
+
     tags = list(market_rule.get("risk_tags", []))
     reason = str(market_rule["base_reason"])
 
@@ -214,3 +226,30 @@ def _is_newly_confirmed_heavenly_root(subject: dict[str, Any]) -> bool:
             for fact in known_facts
         )
     )
+
+
+def _subject_authority_rank(subject: dict[str, Any]) -> str:
+    identity = subject.get("identity", {})
+    if not isinstance(identity, dict):
+        return "servant"
+
+    current_status = identity.get("current_status")
+    if current_status == "outer_disciple":
+        return "outer_disciple"
+    if current_status == "inner_disciple":
+        return "inner_disciple"
+    if current_status == "deacon":
+        return "deacon"
+    if isinstance(current_status, str) and "servant" in current_status:
+        return "servant"
+    return "servant"
+
+
+def _rank_at_least(current_rank: str, minimum_rank: str, rules: dict[str, Any]) -> bool:
+    ranks = rules.get("authority_ranks", [])
+    if not isinstance(ranks, list):
+        return current_rank == minimum_rank
+    try:
+        return ranks.index(current_rank) >= ranks.index(minimum_rank)
+    except ValueError:
+        return False

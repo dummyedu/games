@@ -5,6 +5,7 @@ from world_engine.actions import (
 )
 from pathlib import Path
 
+from world_engine.io import load_yaml
 from world_engine.actions import load_action_rules, resolve_action_permission
 
 
@@ -157,3 +158,25 @@ def test_speech_claim_is_risky_but_does_not_mutate_subject_truth():
     assert result.risk["level"] == "medium"
     assert subject == before
     assert subject["true_state"]["bloodline"] == "ordinary_mortal_family"
+
+
+def test_seed_world_candidate_must_register_before_market_permission():
+    world_root = Path("worlds/qinglan_frontier")
+    subject = load_yaml(
+        world_root
+        / "continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/characters/active_subject.yaml"
+    )
+    rules = load_action_rules(world_root)
+    request = ActionRequest(
+        type="travel",
+        actor_id="char-active-subject",
+        target_id="qinglan-herb-market",
+        declared_intent="去集市买东西",
+        current_place="facility-qingyang-outer-affairs-hall",
+    )
+
+    result = resolve_action_permission(subject, request, rules)
+
+    assert result.status == "requires_intermediate"
+    assert result.risk["level"] == "none"
+    assert result.required_steps == ["complete outer-disciple registration at Outer Affairs Hall"]
