@@ -1,0 +1,84 @@
+id: beast-firestripe-wolf
+name: Firestripe Wolf
+type: beast
+species: firestripe_wolf
+realm_band: qi_refining_beast
+element_affinity:
+  - fire
+variants:
+  juvenile:
+    layer_range: [1, 2]
+    stat_multipliers:
+      life: 0.75
+      attack: 0.75
+      defense: 0.8
+      speed: 1.05
+  adult:
+    layer_range: [2, 4]
+    stat_multipliers:
+      life: 1.0
+      attack: 1.0
+      defense: 1.0
+      speed: 1.0
+  elite:
+    layer_range: [4, 6]
+    stat_multipliers:
+      life: 1.3
+      attack: 1.25
+      defense: 1.15
+      speed: 1.1
+base_combat:
+  layer_1:
+    mana_max: 25
+    life: 70
+    attack: 14
+    defense: 6
+    speed: 14
+    divine_sense: 3
+    control_resistance: 3
+    poison_resistance: 2
+  layer_scaling:
+    mana_max: 12
+    life: 18
+    attack: 5
+    defense: 3
+    speed: 2
+    divine_sense: 1
+abilities:
+  bite:
+    type: physical_attack
+    base_hit: 70
+    base_damage: 18
+  ember_pounce:
+    type: fire_attack
+    mana_cost: 8
+    base_hit: 62
+    base_damage: 24
+materials:
+  - id: mat-firestripe-pelt
+    chance: 0.75
+    condition_requirements:
+      corpse_not_burned: true
+  - id: mat-warm-beast-blood
+    chance: 0.6
+    condition_requirements:
+      harvested_within_hours: 2
+  - id: mat-beast-core-fragment
+    chance: 0.15
+    condition_requirements:
+      layer_min: 3
+growth:
+  age_stages:
+    juvenile_days: [0, 180]
+    adult_days: [181, 1200]
+    old_days: [1201, 1800]
+  growth_inputs:
+    - time
+    - feeding
+    - spiritual_environment
+    - combat_survival
+behavior:
+  aggression: territorial
+  preferred_environment:
+    - fire_warm_woods
+    - dry_ridge

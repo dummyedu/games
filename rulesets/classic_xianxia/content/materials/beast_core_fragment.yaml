@@ -1,0 +1,12 @@
+id: mat-beast-core-fragment
+name: Beast Core Fragment
+type: material
+grade: first_rank_lower
+uses:
+  - cultivation_support
+  - artifact_material
+  - sect_task_turn_in
+  - trade
+quality_factors:
+  intact_extraction: preserves_value
+  failed_extraction: destroys_material

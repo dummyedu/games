@@ -1,0 +1,25 @@
+id: rules-combat-rewards-v1
+reward_categories:
+  trivial:
+    combat_experience: 0
+    skill_sp_multiplier: 0.1
+  low:
+    combat_experience: 1
+    skill_sp_multiplier: 0.5
+  standard:
+    combat_experience: 2
+    skill_sp_multiplier: 1.0
+  dangerous:
+    combat_experience: 4
+    skill_sp_multiplier: 1.5
+  life_threatening:
+    combat_experience: 8
+    skill_sp_multiplier: 2.0
+relative_strength_thresholds:
+  trivial_max: 0.4
+  low_max: 0.75
+  standard_max: 1.25
+  dangerous_max: 1.75
+anti_farming:
+  repeated_low_risk_same_target_limit: 2
+  trivial_repeat_combat_experience: 0

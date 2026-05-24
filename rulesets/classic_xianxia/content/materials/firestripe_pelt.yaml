@@ -1,0 +1,11 @@
+id: mat-firestripe-pelt
+name: Firestripe Pelt
+type: material
+grade: first_rank_lower
+uses:
+  - low_grade_artifact_material
+  - sect_task_turn_in
+  - trade
+quality_factors:
+  damaged_by_fire: lowers_value
+  clean_harvest: preserves_value

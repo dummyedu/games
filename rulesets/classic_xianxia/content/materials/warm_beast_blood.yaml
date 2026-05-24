@@ -1,0 +1,11 @@
+id: mat-warm-beast-blood
+name: Warm Beast Blood
+type: material
+grade: first_rank_lower
+uses:
+  - fire_aspect_pill_material
+  - talisman_ink
+  - trade
+quality_factors:
+  harvested_quickly: preserves_value
+  delayed_harvest: spoils_value
