@@ -136,6 +136,8 @@ The general formula is:
 CP gained = effective behavior x talent efficiency x environment efficiency x state modifier
 ```
 
+Spiritual roots follow an element-root model rather than a generic quality ladder. Common roots include five-element roots, four-element roots, three-element roots, dual-element roots, single-element heavenly roots, mutated roots, and hidden/special roots. More roots usually mean slower cultivation but broader basic spell compatibility. Heavenly and mutated roots cultivate faster and are stronger with matching spells, but their usable spell families are narrower.
+
 Most people do not continuously cultivate effectively. Every character has a cultivation state:
 
 - not cultivating

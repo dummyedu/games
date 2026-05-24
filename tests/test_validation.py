@@ -135,6 +135,29 @@ def test_validate_world_reports_missing_character_content_references(tmp_path: P
     assert "character char-a references missing content id: equip-missing" in result.errors
 
 
+def test_validate_world_reports_missing_spiritual_root_definition(tmp_path: Path):
+    write(
+        tmp_path / "rulesets/classic_xianxia/cultivation.yaml",
+        "id: rules-cultivation-v1\nspiritual_roots:\n  five_element_roots:\n    daily_cp: 0.6\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/world.yaml",
+        "id: world-test\nactive_subject: char-a\nruleset: classic_xianxia\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/indexes/entities.yaml",
+        "id: index-entities\nentities:\n  char-a:\n    type: character\n    state: materialized\n    path: chars/a.yaml\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/chars/a.yaml",
+        "id: char-a\nname: A\ntrue_state:\n  spiritual_root: missing_root\n",
+    )
+
+    result = validate_world(tmp_path / "worlds/xuanyuan")
+
+    assert "character char-a references missing spiritual root: missing_root" in result.errors
+
+
 def test_cli_validate_world_reports_ok(tmp_path: Path, capsys):
     from world_engine.cli import main
 

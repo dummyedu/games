@@ -6,7 +6,11 @@ true_state:
   layer: 3
   cp: 430
   current_layer_cp_required: 480
-  spiritual_root: middle_spiritual_root
+  spiritual_root: three_element_roots
+  root_elements:
+    - wood
+    - water
+    - earth
   age: 17
   lifespan_limit: 120
   foundation: ordinary

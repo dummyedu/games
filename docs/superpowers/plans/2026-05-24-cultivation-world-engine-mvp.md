@@ -21,6 +21,8 @@ worlds/xuanyuan/
 
 For current work, use `README.md` and `docs/superpowers/specs/2026-05-24-cultivation-world-engine-design.md` as the source of truth for paths. The older `world/...` paths below are retained as execution history for the original MVP plan.
 
+The current ruleset also uses an element-root model (`five_element_roots`, `single_element_heavenly_root`, `mutated_root`, etc.) rather than the original MVP's generic poor/middle/superior root ladder.
+
 ---
 
 ## Scope Boundary

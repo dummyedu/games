@@ -37,6 +37,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
 
     ruleset = world.get("ruleset")
     content_ids: set[str] | None = None
+    spiritual_root_ids: set[str] | None = None
     if ruleset:
         root = rulesets_root or _default_rulesets_root(world_root)
         ruleset_path = root / str(ruleset)
@@ -44,6 +45,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
             errors.append(f"ruleset {ruleset} does not exist")
         else:
             content_ids = _collect_content_ids(ruleset_path)
+            spiritual_root_ids = _collect_spiritual_root_ids(ruleset_path)
 
     for entity_id, entity in entities.items():
         if not isinstance(entity, dict):
@@ -70,7 +72,14 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
             file_id = entity_data.get("id")
             if file_id != entity_id:
                 errors.append(f"materialized entity {entity_id} file id mismatch: {file_id}")
-            _validate_entity_content_references(entity_id, entity, entity_data, content_ids, errors)
+            _validate_entity_ruleset_references(
+                entity_id,
+                entity,
+                entity_data,
+                content_ids,
+                spiritual_root_ids,
+                errors,
+            )
         elif state == "indexed":
             if path_value is not None:
                 warnings.append(f"indexed entity {entity_id} has path {path_value}")
@@ -103,18 +112,43 @@ def _collect_content_ids(ruleset_path: Path) -> set[str]:
     return content_ids
 
 
-def _validate_entity_content_references(
+def _collect_spiritual_root_ids(ruleset_path: Path) -> set[str]:
+    path = ruleset_path / "cultivation.yaml"
+    if not path.exists():
+        return set()
+
+    try:
+        data = load_yaml(path)
+    except WorldDataError:
+        return set()
+
+    roots = data.get("spiritual_roots", {})
+    if isinstance(roots, dict):
+        return {root_id for root_id in roots if isinstance(root_id, str)}
+    return set()
+
+
+def _validate_entity_ruleset_references(
     entity_id: str,
     entity_index: dict[str, object],
     entity_data: dict[str, object],
     content_ids: set[str] | None,
+    spiritual_root_ids: set[str] | None,
     errors: list[str],
 ) -> None:
-    if content_ids is None:
-        return
-
     entity_type = entity_index.get("type")
     if entity_type == "character":
+        true_state = entity_data.get("true_state", {})
+        if isinstance(true_state, dict) and spiritual_root_ids is not None:
+            spiritual_root = true_state.get("spiritual_root")
+            if isinstance(spiritual_root, str) and spiritual_root not in spiritual_root_ids:
+                errors.append(
+                    f"character {entity_id} references missing spiritual root: {spiritual_root}"
+                )
+
+        if content_ids is None:
+            return
+
         skills = entity_data.get("skills", {})
         if isinstance(skills, dict):
             for content_id in skills:
@@ -136,6 +170,9 @@ def _validate_entity_content_references(
                         errors.append(f"character {entity_id} references missing content id: {content_id}")
 
     if entity_type == "facility":
+        if content_ids is None:
+            return
+
         inventory = entity_data.get("inventory", {})
         if isinstance(inventory, dict):
             for content_id in inventory:

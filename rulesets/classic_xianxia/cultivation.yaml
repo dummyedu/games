@@ -1,15 +1,34 @@
 id: rules-cultivation-v1
-talents:
-  poor_spiritual_root:
-    daily_cp: 0.5
-  middle_spiritual_root:
+spiritual_roots:
+  five_element_roots:
+    elements: [metal, wood, water, fire, earth]
+    daily_cp: 0.6
+    spell_affinities: [metal, wood, water, fire, earth]
+    description: Slowest common cultivation speed, broad but shallow spell compatibility.
+  four_element_roots:
+    elements: variable_four
+    daily_cp: 0.75
+    description: Slow cultivation speed with one missing basic element.
+  three_element_roots:
+    elements: variable_three
+    daily_cp: 0.9
+    description: Common mixed roots with moderate difficulty.
+  dual_element_roots:
+    elements: variable_two
+    daily_cp: 1.2
+    description: Faster than mixed roots, narrower spell compatibility.
+  single_element_heavenly_root:
+    elements: variable_one
+    daily_cp: 2.5
+    description: Heavenly root with one pure basic element, fast cultivation and strong matching spells.
+  mutated_root:
+    elements: mutated
+    daily_cp: 2.8
+    description: Rare variant root such as wind, ice, thunder, or darkness; fast and often combat-favored.
+  hidden_root:
+    elements: hidden
     daily_cp: 1.0
-  superior_spiritual_root:
-    daily_cp: 1.5
-  excellent_spiritual_root:
-    daily_cp: 2.0
-  heavenly_spiritual_root:
-    daily_cp: 3.0
+    description: Special root that requires discovery before its true benefit is available.
 qi_refining_thresholds:
   layer_1_to_2: 120
   layer_2_to_3: 240
