@@ -40,3 +40,20 @@ def test_validate_world_reports_missing_materialized_path(tmp_path: Path):
     result = validate_world(tmp_path / "world")
 
     assert "materialized entity char-a path does not exist: world/chars/a.yaml" in result.errors
+
+
+def test_cli_validate_world_reports_ok(tmp_path: Path, capsys):
+    from world_engine.cli import main
+
+    write(tmp_path / "world/world.yaml", "id: world-test\nactive_subject: char-a\n")
+    write(
+        tmp_path / "world/indexes/entities.yaml",
+        "id: index-entities\nentities:\n  char-a:\n    type: character\n    state: materialized\n    path: world/chars/a.yaml\n",
+    )
+    write(tmp_path / "world/chars/a.yaml", "id: char-a\nname: A\n")
+
+    exit_code = main(["validate", str(tmp_path / "world")])
+
+    captured = capsys.readouterr()
+    assert exit_code == 0
+    assert "valid" in captured.out
