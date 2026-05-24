@@ -31,7 +31,7 @@ combat:
   poison_resistance: 5
   combat_experience: 12
 skills:
-  spell-fireball-1:
+  spell-water-shield-1:
     source: Qingyun library
     completeness: complete
     stage: practiced

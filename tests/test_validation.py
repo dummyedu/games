@@ -158,6 +158,41 @@ def test_validate_world_reports_missing_spiritual_root_definition(tmp_path: Path
     assert "character char-a references missing spiritual root: missing_root" in result.errors
 
 
+def test_validate_world_reports_spell_outside_character_root_elements(tmp_path: Path):
+    write(
+        tmp_path / "rulesets/classic_xianxia/cultivation.yaml",
+        "id: rules-cultivation-v1\nspiritual_roots:\n  dual_element_roots:\n    daily_cp: 1.2\n",
+    )
+    write(
+        tmp_path / "rulesets/classic_xianxia/content/spells/fireball.yaml",
+        "id: spell-fireball-1\ntype: attack\nelement: fire\n",
+    )
+    write(
+        tmp_path / "rulesets/classic_xianxia/content/spells/water_shield.yaml",
+        "id: spell-water-shield-1\ntype: defense\nelement: water\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/world.yaml",
+        "id: world-test\nactive_subject: char-a\nruleset: classic_xianxia\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/indexes/entities.yaml",
+        "id: index-entities\nentities:\n  char-a:\n    type: character\n    state: materialized\n    path: chars/a.yaml\n",
+    )
+    write(
+        tmp_path / "worlds/xuanyuan/chars/a.yaml",
+        "id: char-a\nname: A\ntrue_state:\n  spiritual_root: dual_element_roots\n  root_elements:\n    - water\nskills:\n  spell-fireball-1:\n    stage: entry\n  spell-water-shield-1:\n    stage: entry\n",
+    )
+
+    result = validate_world(tmp_path / "worlds/xuanyuan")
+
+    assert (
+        "character char-a cannot use spell spell-fireball-1 with element fire outside root elements: water"
+        in result.errors
+    )
+    assert not any("spell-water-shield-1" in error for error in result.errors)
+
+
 def test_cli_validate_world_reports_ok(tmp_path: Path, capsys):
     from world_engine.cli import main
 

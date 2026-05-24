@@ -37,6 +37,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
 
     ruleset = world.get("ruleset")
     content_ids: set[str] | None = None
+    content_by_id: dict[str, dict[str, object]] = {}
     spiritual_root_ids: set[str] | None = None
     if ruleset:
         root = rulesets_root or _default_rulesets_root(world_root)
@@ -44,7 +45,8 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
         if not ruleset_path.exists():
             errors.append(f"ruleset {ruleset} does not exist")
         else:
-            content_ids = _collect_content_ids(ruleset_path)
+            content_by_id = _collect_content_by_id(ruleset_path)
+            content_ids = set(content_by_id)
             spiritual_root_ids = _collect_spiritual_root_ids(ruleset_path)
 
     for entity_id, entity in entities.items():
@@ -77,6 +79,7 @@ def validate_world(world_root: Path, rulesets_root: Path | None = None) -> Valid
                 entity,
                 entity_data,
                 content_ids,
+                content_by_id,
                 spiritual_root_ids,
                 errors,
             )
@@ -96,11 +99,15 @@ def _default_rulesets_root(world_root: Path) -> Path:
 
 
 def _collect_content_ids(ruleset_path: Path) -> set[str]:
+    return set(_collect_content_by_id(ruleset_path))
+
+
+def _collect_content_by_id(ruleset_path: Path) -> dict[str, dict[str, object]]:
     content_root = ruleset_path / "content"
     if not content_root.exists():
-        return set()
+        return {}
 
-    content_ids: set[str] = set()
+    content_by_id: dict[str, dict[str, object]] = {}
     for path in content_root.rglob("*.yaml"):
         try:
             data = load_yaml(path)
@@ -108,8 +115,8 @@ def _collect_content_ids(ruleset_path: Path) -> set[str]:
             continue
         content_id = data.get("id")
         if isinstance(content_id, str):
-            content_ids.add(content_id)
-    return content_ids
+            content_by_id[content_id] = data
+    return content_by_id
 
 
 def _collect_spiritual_root_ids(ruleset_path: Path) -> set[str]:
@@ -133,6 +140,7 @@ def _validate_entity_ruleset_references(
     entity_index: dict[str, object],
     entity_data: dict[str, object],
     content_ids: set[str] | None,
+    content_by_id: dict[str, dict[str, object]],
     spiritual_root_ids: set[str] | None,
     errors: list[str],
 ) -> None:
@@ -154,6 +162,8 @@ def _validate_entity_ruleset_references(
             for content_id in skills:
                 if content_id not in content_ids:
                     errors.append(f"character {entity_id} references missing content id: {content_id}")
+                    continue
+                _validate_spell_element(entity_id, str(content_id), content_by_id, true_state, errors)
 
         equipment = entity_data.get("equipment", [])
         if isinstance(equipment, list):
@@ -178,3 +188,32 @@ def _validate_entity_ruleset_references(
             for content_id in inventory:
                 if content_id not in content_ids:
                     errors.append(f"facility {entity_id} references missing content id: {content_id}")
+
+
+def _validate_spell_element(
+    entity_id: str,
+    content_id: str,
+    content_by_id: dict[str, dict[str, object]],
+    true_state: dict[object, object],
+    errors: list[str],
+) -> None:
+    content = content_by_id.get(content_id, {})
+    if content.get("type") != "attack" and "element" not in content:
+        return
+
+    element = content.get("element")
+    if not isinstance(element, str) or element in {"neutral", "none"}:
+        return
+
+    root_elements = true_state.get("root_elements", [])
+    if not isinstance(root_elements, list):
+        root_elements = []
+    allowed = {item for item in root_elements if isinstance(item, str)}
+    if element in allowed:
+        return
+
+    allowed_text = ", ".join(sorted(allowed)) if allowed else "none"
+    errors.append(
+        f"character {entity_id} cannot use spell {content_id} with element {element} "
+        f"outside root elements: {allowed_text}"
+    )
