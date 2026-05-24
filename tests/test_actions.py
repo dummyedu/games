@@ -5,7 +5,6 @@ from world_engine.actions import (
 )
 from pathlib import Path
 
-from world_engine.io import load_yaml
 from world_engine.actions import load_action_rules, resolve_action_permission
 
 
@@ -160,12 +159,18 @@ def test_speech_claim_is_risky_but_does_not_mutate_subject_truth():
     assert subject["true_state"]["bloodline"] == "ordinary_mortal_family"
 
 
-def test_seed_world_candidate_must_register_before_market_permission():
+def test_candidate_must_register_before_market_permission():
     world_root = Path("worlds/qinglan_frontier")
-    subject = load_yaml(
-        world_root
-        / "continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/characters/active_subject.yaml"
-    )
+    subject = {
+        "id": "char-active-subject",
+        "identity": {"current_status": "outer_entry_spirit_root_confirmed"},
+        "true_state": {"spiritual_root": "single_element_heavenly_root"},
+        "knowledge": {
+            "known_facts": [
+                "The formal retest confirmed a single-element heavenly fire root."
+            ]
+        },
+    }
     rules = load_action_rules(world_root)
     request = ActionRequest(
         type="travel",
