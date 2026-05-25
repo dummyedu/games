@@ -1,0 +1,35 @@
+id: facility-qingyang-scripture-pavilion
+name: Qingyang Scripture Pavilion
+type: facility
+state: materialized
+owner: sect-qingyang
+functions:
+  - basic_method_lending
+  - public_outer_lectures
+  - lecture_attendance_record
+access:
+  outer_disciple: allowed_basic_floor
+  servant: restricted
+rules:
+  no_private_copying_without_contribution: true
+  outer_lectures_are_recorded_but_not_daily_required: true
+  fire_spells_require_practice_ground_drills_for_casting_reliability: true
+current_scene:
+  active_subject_stage: attended_first_fire_foundation_lecture
+  recent_lecture:
+    id: lecture-fire-foundation-day-16
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 16
+      time_of_day: morning
+    topic: Fire-root breath rhythm and first-spell ignition timing
+    attendance_recorded:
+      - char-active-subject
+    practical_effect:
+      - clarified why unstable Fireball output wastes mana
+      - improved the active subject's next practice efficiency
+event_hooks:
+  - fire_foundation_public_lecture

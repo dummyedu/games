@@ -1,0 +1,128 @@
+id: char-luo-jing
+name: Luo Jing
+state: standard_character
+identity:
+  current_status: outer_disciple
+  sect: sect-qingyang
+  residence: fire_courtyard_outer_rooms
+true_state:
+  realm: qi_refining
+  layer: 3
+  cp: 402
+  current_layer_cp_required: 480
+  spiritual_root: dual_element_roots
+  root_elements:
+    - fire
+    - earth
+  age: 21
+  lifespan_limit: 120
+  foundation: ordinary
+  pill_poison: 3
+  wounds: []
+cultivation_state:
+  rhythm: stable
+  bottleneck: next_layer_resources
+combat:
+  mana_max: 110
+  mana_current: 90
+  life: 100
+  divine_sense: 18
+  attack: 32
+  defense: 22
+  speed: 22
+  control_resistance: 8
+  poison_resistance: 5
+  combat_experience: 16
+skills:
+  spell-fireball-1:
+    source: Qingyang outer library
+    completeness: complete
+    stage: practiced
+    sp: 430
+equipment: []
+resources:
+  spirit_stones_low: 14
+  contribution: 1
+  consumables: []
+knowledge:
+  known_facts:
+    - Fireball practice should be done at the practice ground or under a senior disciple's supervision.
+    - Residence damage can lead to compensation and outer-affairs discipline.
+    - Recent ridge-side dewleaf routes showed fresh scorch-claw tracks, so field gathering should use watch rotation and avoid dusk return.
+  rumors: []
+relationships:
+  char-active-subject:
+    type: outer_residence_neighbor
+    trust: 48
+    belief: Talented new disciple who obeyed field instructions during a real beast probe and may be reliable for cautious low-risk tasks.
+event_history:
+  - id: event-warned-active-subject-about-residence-rules
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+      time_of_day: night
+    place: outer_residence_fire_courtyard-temp-room
+    summary: Luo Jing warned the active subject not to practice Fireball inside the residence.
+  - id: event-gave-limited-fireball-advice
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 13
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: Luo Jing told the active subject to begin Fireball practice at the practice ground, use low mana output, and keep a clear target lane.
+  - id: event-corrected-active-subject-fireball-control
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 14
+      time_of_day: afternoon
+    place: facility-qingyang-practice-ground
+    summary: Luo Jing spent a short practice-ground session correcting the active subject's wrist angle, breath rhythm, and release timing, but did not become a formal teacher.
+  - id: event-background-ridge-dewleaf-team-task
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 20
+      time_of_day: day
+    place: qinglan-frontier outer ridge
+    summary: Luo Jing joined a small outer-disciple team for a near-ridge dewleaf gathering task, earned a modest reward, and returned without injury after avoiding fresh scorch-claw tracks near dusk.
+  - id: event-noticed-active-subject-sustained-discipline
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 26
+      time_of_day: night
+    place: outer_residence_fire_courtyard-temp-room
+    summary: Luo Jing noticed that the active subject kept to quiet cultivation and practice-ground rules for more than ten days, improving his view of the active subject's discipline.
+  - id: event-agreed-active-subject-near-ridge-team-task
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: afternoon
+    place: outer_residence_fire_courtyard-temp-room
+    summary: Luo Jing agreed to team with the active subject for a near-ridge dewleaf task, but refused to start with the Demonwood-edge posting and required a morning departure with dusk return avoided.
+  - id: event-completed-near-ridge-task-with-active-subject
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 28
+      time_of_day: late_afternoon
+    place: facility-qingyang-mission-hall
+    summary: Luo Jing completed the near-ridge dewleaf task with the active subject, helped repel a juvenile Firestripe Wolf without overcommitting, and took the larger reward share agreed before departure.

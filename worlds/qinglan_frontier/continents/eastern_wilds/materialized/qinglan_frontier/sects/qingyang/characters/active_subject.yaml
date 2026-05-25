@@ -2,46 +2,392 @@ id: char-active-subject
 name: Active Subject
 state: active_subject
 identity:
-  current_status: pill_hall_servant_outer_entry_candidate
+  current_status: outer_disciple
   previous_role: pill_hall_servant
-  pending_status: outer_disciple
+  pending_status: null
+  sect: sect-qingyang
+  token: qingyang_outer_disciple_token_new_issue
+  residence: outer_residence_fire_courtyard_temp_room
 true_state:
   realm: qi_refining
-  layer: 1
-  cp: 40
-  current_layer_cp_required: 120
+  layer: 2
+  cp: 121
+  current_layer_cp_required: 240
   spiritual_root: single_element_heavenly_root
   root_elements:
     - fire
   age: 16
   lifespan_limit: 120
   foundation: ordinary
-  pill_poison: 0
+  pill_poison: 1
   wounds: []
 cultivation_state:
-  rhythm: unstable
-  bottleneck: pending_outer_entry_resources
+  rhythm: stable
+  bottleneck: needs_layer_2_consolidation_and_task_choice
 combat:
-  mana_max: 45
-  mana_current: 45
+  mana_max: 72
+  mana_current: 72
   life: 100
-  divine_sense: 8
-  attack: 12
-  defense: 8
-  speed: 10
-  control_resistance: 3
+  divine_sense: 13
+  attack: 22
+  defense: 13
+  speed: 16
+  control_resistance: 5
   poison_resistance: 4
-  combat_experience: 0
-skills: {}
+  combat_experience: 1
+skills:
+  spell-fireball-1:
+    source: Qingyang outer library first-spell issue
+    completeness: complete
+    stage: practiced
+    sp: 430
 equipment: []
 resources:
-  spirit_stones_low: 2
+  spirit_stones_low: 13
+  contribution: 1
   consumables: []
 knowledge:
   known_facts:
     - The active subject had a prior fire-root reaction in servant registration.
     - Formal outer entry requires a spirit root retest.
-    - Fire spells and fire-control techniques should match the active subject if the retest confirms the root.
-  rumors: []
-relationships: {}
-event_history: []
+    - The formal retest confirmed a single-element heavenly fire root.
+    - The active subject completed Qingyang outer-disciple registration.
+    - Fire spells and fire-control techniques should match the active subject.
+    - The first issued spell is Fireball.
+    - Qinglan Herb Market has low-tier herb bundles around three low-grade spirit stones, but bundle quality varies.
+    - The first reading of the Fireball manual is complete, but actual casting practice still requires a safe place and fresh time.
+    - Chen Qiao says new outer disciples normally learn practice ground rules before casting combat spells.
+    - Luo Jing says Fireball practice should start at the practice ground with low mana output and a clear target lane.
+    - The active subject completed a first safe low-output Fireball practice session at the Qingyang practice ground.
+    - Mission Hall task boards separate low-risk sect errands from field tasks with travel and beast risk.
+    - Fireball has crossed the formal entry threshold after a safe afternoon practice session, but it is not yet practiced or reliable under pressure.
+    - Qingyang outer disciples are not locked into daily classes, but new outer disciples must complete a rules briefing by the third day after registration.
+    - Public outer lectures are optional but recorded; the next fire foundation lecture is posted for Qingyang year 73, spring month 2, day 16 morning.
+    - A heavenly fire root creates sect attention, but does not grant direct access to elders, a master, or the Golden Core ancestor.
+    - A practical route to Qi Refining layer 2 is to combine daily cultivation, controlled Fireball drills, the ordinary qi gathering pill, and low-risk sect routine compliance before field tasks.
+    - The required new outer-disciple rules briefing has been completed.
+    - The active subject attended the first available fire foundation public lecture and learned better ignition timing for Fireball.
+    - Sustained low-output drills raised Fireball from entry-level casting to practiced fixed-target reliability.
+    - The active subject reached Qi Refining layer 2 on Qingyang year 73, spring month 2, day 27 morning.
+    - The active subject registered the Qi Refining layer-2 breakthrough at Outer Affairs Hall.
+    - The next outer-court spring drill contest is posted for Qingyang year 73, spring month 2, day 35, with registration from day 31 to day 33.
+    - Luo Jing recently saw scorch-claw tracks near ridge-side herb routes and advised returning before dusk.
+    - The active subject and Luo Jing accepted a near-ridge dewleaf gathering task for day 28 morning.
+    - Combat experience helps with battlefield judgment, threat reading, retreat timing, and public sparring evaluation; it does not directly raise cultivation realm.
+    - A juvenile Firestripe Wolf was repelled during the first near-ridge task; it withdrew alive, so no beast materials were harvested.
+    - A self-directed wild trial near Qinglan Outer Ridge is not an official task and gives no guaranteed reward.
+  rumors:
+    - Chen Qiao claims outer disciples who delay tasks too long may get worse assignments, but the exact rule is unverified.
+    - Chen Qiao says Mission Hall herb-gathering tasks have been frequent lately because pill demand is high.
+    - Some Mission Hall notices imply Demonwood Forest herb routes are paying more because gatherers have been avoiding them.
+relationships:
+  char-han-yue:
+    type: procedure_official
+    trust: 46
+    belief: Confirmed the active subject's heavenly fire root, received the layer-2 registration notice, and has not issued a personal summons.
+  char-chen-qiao:
+    type: outer_residence_neighbor
+    trust: 43
+    belief: Talkative neighbor who knows ordinary outer-court routines but may spread news.
+  char-luo-jing:
+    type: outer_residence_neighbor
+    trust: 47
+    belief: Quiet senior outer disciple who saw the active subject obey field instructions and use Fireball without chasing a wounded beast, but is not a formal master.
+event_history:
+  - id: event-formal-fire-heavenly-root-confirmation
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+    place: facility-qingyang-spirit-test-yard
+    summary: Formal outer-entry testing confirmed the active subject as a single-element heavenly fire root cultivator.
+  - id: event-asked-heavenly-root-treatment
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+    place: facility-qingyang-spirit-test-yard
+    summary: The active subject asked Deacon Han Yue about the treatment and risks attached to a heavenly fire root.
+  - id: event-first-outer-disciple-registration
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+    place: facility-qingyang-outer-affairs-hall
+    summary: The active subject completed outer-disciple registration, received an identity token, a temporary residence assignment, twelve low-grade spirit stones in total, one ordinary qi gathering pill, and the Fireball spell manual.
+  - id: event-first-trip-to-qinglan-herb-market
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+      time_of_day: afternoon
+    place: qinglan-herb-market
+    summary: The active subject made a short trip from Qingyang Sect to Qinglan Herb Market. The trip was allowed for an outer disciple but carried low attention risk because of the recent heavenly fire root confirmation.
+  - id: event-inspected-qinglan-herb-stall
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+      time_of_day: afternoon
+    place: qinglan-herb-market
+    summary: The active subject inspected a frontier gatherer's herb mat, recognized real fire-warm grass, and noticed that one mixed bundle was padded with lower-value bitterroot stems.
+  - id: event-night-return-and-fireball-manual-reading
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+      time_of_day: night
+    place: outer_residence_fire_courtyard-temp-room
+    summary: The active subject returned from Qinglan Herb Market at night and could only read the Fireball manual lightly, gaining initial familiarity but not enough time or safety for full casting practice.
+  - id: event-met-fire-courtyard-neighbors
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+      time_of_day: night
+    place: outer_residence_fire_courtyard-temp-room
+    summary: During night quiet hours, the active subject briefly met Chen Qiao and Luo Jing, two nearby Fire Courtyard outer disciples, without attempting loud socializing or spell practice.
+  - id: event-first-night-rest-in-fire-courtyard
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 13
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: The active subject kept the first night quiet, returned to the temporary room, and woke the next morning without triggering residence trouble.
+  - id: event-asked-chen-qiao-about-outer-routines
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 13
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: The active subject asked Chen Qiao about ordinary outer-court routines and received practical guidance mixed with unverified rumors.
+  - id: event-asked-luo-jing-about-fireball-practice
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 13
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: The active subject respectfully asked Luo Jing about Fireball practice. Luo Jing gave limited practical advice, increasing the active subject's conceptual familiarity but not replacing real practice.
+  - id: event-first-safe-fireball-practice
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 13
+      time_of_day: late_morning
+    place: facility-qingyang-practice-ground
+    summary: The active subject followed Luo Jing's advice at the practice ground, used low mana output, and briefly formed unstable sparks of Fireball without damaging the target lane.
+  - id: event-first-mission-hall-task-board-inspection
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 13
+      time_of_day: noon
+    place: facility-qingyang-mission-hall
+    summary: The active subject inspected the Mission Hall task board at noon after first Fireball practice, learning that herb demand is high but field tasks vary sharply in risk.
+  - id: event-afternoon-fireball-entry-stabilization
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 13
+      time_of_day: afternoon
+    place: facility-qingyang-practice-ground
+    summary: The active subject returned to the practice ground, repeated low-output Fireball attempts until tired, and stabilized the spell at entry level without damaging shared targets.
+  - id: event-rest-after-fireball-practice
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 14
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: After spending the previous afternoon on Fireball practice, the active subject slept through the night and recovered mana by morning.
+  - id: event-checked-outer-rules-and-formed-training-plan
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 14
+      time_of_day: morning
+    place: facility-qingyang-outer-affairs-hall
+    summary: The active subject chose not to accept a task yet and instead checked Outer Affairs notices about new-disciple briefing duties, public lectures, master-disciple customs, and a realistic plan for reaching Qi Refining layer 2 with a more reliable Fireball.
+  - id: event-completed-new-disciple-rules-briefing
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 14
+      time_of_day: late_morning
+    place: facility-qingyang-outer-affairs-hall
+    summary: The active subject completed the required new outer-disciple rules briefing before the deadline, preserving normal access to routine outer-court services and task acceptance.
+  - id: event-luo-jing-fireball-control-correction
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 14
+      time_of_day: afternoon
+    place: facility-qingyang-practice-ground
+    summary: Luo Jing gave informal correction on Fireball release timing after seeing that the active subject used a proper target lane and did not try to show off.
+  - id: event-began-pill-supported-cultivation
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 15
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: The active subject consumed the issued ordinary qi gathering pill and began a focused cultivation cycle, gaining steady progress but accumulating one point of pill-poison residue.
+  - id: event-attended-fire-foundation-lecture
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 16
+      time_of_day: morning
+    place: facility-qingyang-scripture-pavilion
+    summary: The active subject attended the public fire foundation lecture. The lecture improved theory and practice efficiency but did not grant a new spell or personal master.
+  - id: event-sustained-fireball-and-cultivation-cycle
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 17
+      time_of_day: morning_to_day_26_night
+    place: outer_residence_fire_courtyard-temp-room and facility-qingyang-practice-ground
+    summary: Over ten disciplined days, the active subject alternated closed-door cultivation, low-output Fireball drills, and rest. No task was accepted, no private duel was fought, and no residence rule was violated.
+  - id: event-breakthrough-to-qi-refining-layer-2
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: The active subject crossed the first Qi Refining threshold without forcing the breakthrough and stabilized at Qi Refining layer 2, with stronger mana, body response, and Fireball reliability.
+  - id: event-registered-qi-refining-layer-2
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: morning
+    place: facility-qingyang-outer-affairs-hall
+    summary: The active subject registered the Qi Refining layer-2 breakthrough. Outer Affairs recorded the speed as notable but issued no immediate extra resources or summons.
+  - id: event-learned-outer-court-spring-drill-contest
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: late_morning
+    place: facility-qingyang-outer-affairs-hall
+    summary: The active subject asked about sect competitions and learned that the outer-court spring drill contest will be held on day 35, with registration from day 31 to day 33 and rewards tied to contribution, talisman vouchers, and equipment-exchange priority.
+  - id: event-asked-luo-jing-to-team-for-task
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: afternoon
+    place: outer_residence_fire_courtyard-temp-room
+    summary: The active subject asked Luo Jing to team up for a paying task. Luo Jing agreed to a cautious near-ridge dewleaf task tomorrow, warned against making Demonwood Forest edge the first field outing, and insisted on returning before dusk.
+  - id: event-accepted-near-ridge-dewleaf-team-task
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: late_afternoon
+    place: facility-qingyang-mission-hall
+    summary: The active subject and Luo Jing accepted the near-ridge dewleaf gathering task for day 28 morning. The reward is modest but helps build contribution and field experience toward better equipment access.
+  - id: event-first-near-ridge-task-departure
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 28
+      time_of_day: morning
+    place: qinglan-frontier-outer-ridge
+    summary: The active subject and Luo Jing departed for the near-ridge dewleaf task, keeping to a known route and planning to return before dusk.
+  - id: event-repelled-juvenile-firestripe-wolf
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 28
+      time_of_day: early_afternoon
+    place: qinglan-frontier-outer-ridge
+    summary: A juvenile Firestripe Wolf probed the route after the dewleaf bundle was gathered. The active subject followed Luo Jing's instruction, used Fireball to force distance, and did not chase after the wolf withdrew.
+  - id: event-completed-near-ridge-dewleaf-task
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 28
+      time_of_day: late_afternoon
+    place: facility-qingyang-mission-hall
+    summary: The team returned before dusk and delivered the dewleaf bundle. The active subject received one low-grade spirit stone, one contribution credit, one combat experience point, and a small Fireball practice gain from real field pressure.
+  - id: event-rest-after-first-field-task
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 29
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: After returning from the first near-ridge field task, the active subject avoided further training, slept through the night, and woke with mana recovered and no wound.
+  - id: event-started-self-directed-near-ridge-trial
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 29
+      time_of_day: late_morning
+    place: qinglan-frontier-outer-ridge
+    summary: The active subject went alone to the Qinglan Outer Ridge for a self-directed wild trial. He did not accept an official task and did not ask Luo Jing to accompany him, so the outing is for experience and observation rather than guaranteed reward.

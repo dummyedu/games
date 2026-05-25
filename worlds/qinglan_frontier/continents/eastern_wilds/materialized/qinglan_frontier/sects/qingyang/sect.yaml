@@ -20,17 +20,45 @@ orientation:
 materialized_facilities:
   - facility-qingyang-outer-affairs-hall
   - facility-qingyang-spirit-test-yard
+  - facility-qingyang-practice-ground
+  - facility-qingyang-mission-hall
+  - facility-qingyang-scripture-pavilion
 indexed_facilities:
   - pill_hall
-  - scripture_pavilion
-  - mission_hall
   - law_enforcement_hall
-  - practice_ground
   - outer_residences
 rules:
   outer_entry_requires_formal_spirit_root_test: true
   outer_entry_grants_basic_technique: true
   first_spell_must_match_root_element: true
+routine_rules:
+  new_outer_disciple_rules_briefing:
+    required: true
+    due_day_after_registration: 3
+    venue: facility-qingyang-outer-affairs-hall
+    consequence_if_missed: temporary restriction on nonessential task acceptance until the briefing is completed
+  public_outer_lectures:
+    required: false
+    recorded: true
+    next_fire_foundation_lecture:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 16
+      time_of_day: morning
+      venue: indexed:scripture_pavilion
+      suitability: useful for a fire-root newcomer but not a substitute for practice-ground drilling
+  master_disciple_relation:
+    automatic_for_heavenly_root: false
+    ordinary_path: deacon observation, elder recommendation, trial performance, then formal acceptance
+    current_status_for_active_subject: observed but not summoned
+attention_rules:
+  heavenly_root_newcomer:
+    sect_interest: high
+    immediate_privileges: first matched spell, residence, basic resource issue, routine access
+    immediate_restrictions: no direct elder or ancestor audience without summons or sponsorship
+    expected_observation: Deacons and senior outer disciples will watch discipline, foundation stability, and task choices before investing more resources.
 action_rules:
   market_travel:
     type: travel
@@ -66,3 +94,32 @@ current_pressure:
   - Frontier herb demand is high.
   - Low-tier pill demand exceeds pill hall capacity.
   - New outer disciples are encouraged to complete field tasks.
+scheduled_events:
+  - id: event-outer-court-spring-drill-contest
+    name: Outer Court Spring Drill Contest
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 35
+      time_of_day: morning
+    registration_window:
+      start_day: 31
+      end_day: 33
+    eligibility:
+      rank: outer_disciple
+      realm_range: qi_refining_layer_2_to_5
+      restrictions:
+        - no unresolved discipline penalty
+        - identity and realm registration required
+    events:
+      - fixed_target_spell_control
+      - novice_pair_sparring
+      - task_merit_review
+    likely_rewards:
+      - contribution credit
+      - low-grade defensive talisman vouchers
+      - priority access to basic equipment exchange
+    notes:
+      - Strong roots draw attention, but contest results still require public performance.

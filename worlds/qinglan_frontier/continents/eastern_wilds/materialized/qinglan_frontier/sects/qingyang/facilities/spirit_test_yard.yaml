@@ -12,15 +12,16 @@ temporary_people:
     - same_batch_servant_candidates
     - outer_affairs_clerks
   simple_profiles:
-    - label: spirit_test_deacon
-      role: procedure_official
+    - label: same_batch_servant_candidates
+      role: candidate_group
       materialization: not_yet
       note: Can be materialized if repeated interaction or conflict occurs.
+materialized_people:
+  - char-han-yue
 scene_state:
-  active_subject_stage: awaiting_formal_retest
+  active_subject_stage: formal_retest_completed
   known_previous_record: fire_root_reaction
-  expected_possible_result: single_element_heavenly_root_fire
+  confirmed_result: single_element_heavenly_root_fire
 event_hooks:
-  - formal_fire_heavenly_root_confirmation
   - first_outer_affairs_report
   - same_batch_candidate_reactions

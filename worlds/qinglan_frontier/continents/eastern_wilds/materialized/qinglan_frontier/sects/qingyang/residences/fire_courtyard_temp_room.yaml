@@ -1,0 +1,30 @@
+id: outer_residence_fire_courtyard-temp-room
+name: Fire Courtyard Temporary Room
+type: residence
+state: materialized
+owner: sect-qingyang
+assigned_to: char-active-subject
+rules:
+  open_flame_spellcasting_inside_room: forbidden
+  quiet_hours_after_nightfall: true
+  new_outer_disciple_must_complete_residence_record: true
+scene_state:
+  active_subject_stage: morning_after_first_field_task
+  safety_for_fireball_casting: unsafe
+  nearby_residents:
+    - char-chen-qiao
+    - char-luo-jing
+  notes:
+    - The room is suitable for reading a manual and circulating qi quietly.
+    - Actual Fireball casting risks damaging the residence and violating outer-residence rules.
+    - Night quiet hours limit the active subject to brief low-voice introductions with nearby residents.
+    - The active subject ended the night without disturbing the courtyard.
+    - During the training period, the active subject became known as quiet and disciplined rather than socially active.
+    - Chen Qiao has heard a rumor that the active subject reached Qi Refining layer 2, but has not confirmed it directly.
+    - Luo Jing was away for one near-ridge task and returned with warnings about fresh scorch-claw tracks.
+    - The active subject returned from the first field task tired, kept quiet hours, and slept instead of training further.
+event_hooks:
+  - safe_fireball_practice_session
+  - outer_residence_neighbors
+  - chen_qiao_layer_2_rumor
+  - luo_jing_ridge_task_information

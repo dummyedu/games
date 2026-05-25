@@ -8,11 +8,38 @@ functions:
   - identity_token_distribution
   - residence_assignment
   - first_resource_record
+  - outer_disciple_rule_notice
+  - new_disciple_briefing_registration
 linked_facilities:
   - facility-qingyang-spirit-test-yard
 current_scene:
-  description: The active subject is waiting to complete formal outer-sect entry procedures.
+  description: The active subject has completed formal outer-disciple entry procedures and registered the layer-2 breakthrough.
+  active_subject_stage: layer_2_registered_and_contest_notice_checked
+  issued:
+    identity_token: qingyang_outer_disciple_token_new_issue
+    residence: outer_residence_fire_courtyard_temp_room
+    resources:
+      spirit_stones_low: 10
+      consumables:
+        - cons-ordinary-qi-gathering-pill
+      spells:
+        - spell-fireball-1
 event_hooks:
-  - first_identity_token
-  - first_resource_record
-  - outer_residence_assignment
+  - first_spell_practice
+  - first_outer_residence_arrival
+  - pill_hall_old_background
+  - new_disciple_rules_briefing_due
+  - heavenly_root_observation
+  - layer_2_registration_and_observation
+notices:
+  - id: notice-outer-court-spring-drill-contest
+    type: contest
+    date:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 35
+      time_of_day: morning
+    registration_window: day_31_to_day_33
+    summary: Outer disciples at Qi Refining layers 2 through 5 may register for fixed-target spell control, novice pair sparring, and task merit review if they have no active discipline penalty.

@@ -1,0 +1,66 @@
+id: qinglan-herb-market
+name: Qinglan Herb Market
+type: market
+state: materialized
+region: qinglan-frontier
+distance_from_qingyang:
+  band: near_market
+  travel_time_days: 0.5
+access:
+  ordinary_entry: open
+  qingyang_outer_disciple: allowed_with_risk
+  risk_tags:
+    - travel
+    - market_exposure
+    - attention
+market_profile:
+  tier: low
+  users:
+    - herb_gatherers
+    - qi_refining_scattered_cultivators
+    - qingyang_outer_disciples
+    - small_family_agents
+  common_goods:
+    - low_tier_spirit_herbs
+    - ordinary_pills
+    - blank_talismans
+    - cheap_artifact_repairs
+    - route_rumors
+known_prices:
+  cons-ordinary-qi-gathering-pill:
+    ask_spirit_stones_low: 8
+    availability: limited
+    note: A known pill type in the ruleset; market stock is not guaranteed.
+  low_tier_spirit_herb_bundle:
+    ask_spirit_stones_low: 3
+    availability: common
+    note: Raw herbs are useful for trade or pill-hall contacts but are not yet a ruleset consumable.
+  market_route_rumor:
+    ask_spirit_stones_low: 1
+    availability: common
+    note: Rumors can create hooks but are not facts until verified.
+scene_state:
+  active_subject_stage: left_after_herb_inspection
+  crowd_level: moderate
+  attention_risk: low
+  visible_stalls:
+    - pill_resale_stall
+    - herb_gatherer_mat
+    - worn_artifact_corner
+    - tea_shed_rumor_table
+  current_stall:
+    id: herb_gatherer_mat
+    seller_profile: old_frontier_gatherer
+    goods_on_display:
+      - low_tier_spirit_herb_bundle
+      - fire_warm_grass_three_stalks
+      - mixed_dewleaf_and_bitterroot
+    active_subject_observation:
+      - Fire-warm grass is real but freshly uprooted and should be processed soon.
+      - One mixed bundle contains bitterroot stems that lower pill-hall resale value.
+      - The seller is watching the active subject's Qingyang outer-disciple token.
+event_hooks:
+  - first_market_purchase
+  - market_attention_risk
+  - possible_pill_hall_contact_notice
+  - herb_quality_judgment

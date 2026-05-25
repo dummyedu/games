@@ -6,14 +6,75 @@ current_time:
   year: 73
   season: spring
   month: 2
-  day: 12
+  day: 29
+  time_of_day: late_morning
 active_subject: char-active-subject
 focus:
   continent: cont-eastern-wilds
   region: qinglan-frontier
-  place: facility-qingyang-outer-affairs-spirit-test-yard
+  place: qinglan-frontier-outer-ridge
+time_accounting:
+  previous_day_notes:
+    - Formal retest and outer-disciple registration consumed the earlier part of the day.
+    - The Qinglan Herb Market trip consumed the afternoon and return travel pushed arrival back to night.
+    - Only light manual reading is available tonight; full Fireball practice requires a later safe session.
+  day_13_notes:
+    - The active subject woke in the Fire Courtyard temporary room after a full night's rest.
+    - The day is open for residence registration, practice-ground use, routine inquiries, or sect tasks.
+    - The active subject spent late morning at the practice ground doing low-output Fireball attempts.
+    - The active subject reached Mission Hall at noon to inspect tasks, not yet accepting one.
+    - The active subject returned to the practice ground in the afternoon, stabilized Fireball at entry level, stopped when tired, and slept at night.
+  current_day_notes:
+    - The active subject woke after rest with mana recovered.
+    - Fireball has crossed the entry threshold but remains far from practiced combat reliability.
+    - The active subject spent the morning checking outer-disciple routine rules and forming a training plan instead of accepting a task.
+  day_14_to_27_training_notes:
+    - Day 14 late morning was spent completing the required new outer-disciple rules briefing.
+    - Day 14 afternoon was spent under Luo Jing's informal correction at the practice ground, improving Fireball control without damaging shared targets.
+    - Day 15 began a focused cultivation period using the issued ordinary qi gathering pill; the pill was consumed and mild pill-poison residue accumulated.
+    - Day 16 morning was spent attending the posted fire foundation public lecture; later practice focused on ignition timing instead of brute output.
+    - Days 17 to 26 were spent alternating closed-door cultivation, low-output Fireball drills, sleep, and routine quiet-hours compliance, with no sect task accepted.
+    - Day 27 morning the active subject crossed the Qi Refining layer 1 threshold and stabilized at Qi Refining layer 2 without forcing the breakthrough.
 principles:
   - claims_are_not_facts
   - actions_change_truth
   - subject_increases_event_resolution
   - subject_intent_is_not_world_truth
+  - relevant_background_entities_evolve_on_multi_day_skips
+  - key_events_are_foreground_scenes
+background_evolution_policy:
+  trigger: multi_day_time_skip
+  minimum_skip_days_for_related_entity_pass: 3
+  scope: related characters, active local institutions, and unresolved hooks near the active subject
+  detail_level: coarse unless the active subject directly investigates or joins the event
+background_evolution:
+  day_14_to_27_pass:
+    scope:
+      - char-chen-qiao
+      - char-luo-jing
+      - char-han-yue
+      - facility-qingyang-mission-hall
+      - outer_residence_fire_courtyard-temp-room
+    summary:
+      - Chen Qiao completed small outer-court errands and heard rumors about the active subject's unusually fast layer-2 breakthrough.
+      - Luo Jing joined one low-risk ridge-side team task and returned with practical information about recent beast signs.
+      - Han Yue received procedural notice that the heavenly-root newcomer had completed rules briefing, attended a lecture, and reached layer 2.
+      - Mission Hall refreshed some early tasks; field-task risk notes changed with recent gatherer reports.
+day_27_notes:
+  - The active subject registered the Qi Refining layer-2 breakthrough at Outer Affairs Hall in the morning.
+  - Outer Affairs did not issue extra resources immediately, but recorded the breakthrough and forwarded the observation note.
+  - The active subject asked about sect competitions and learned of an upcoming outer-court drill contest.
+  - Luo Jing agreed to join one cautious near-ridge dewleaf task tomorrow, but refused to make the Demonwood-edge task the first field outing.
+  - The active subject accepted the near-ridge dewleaf task as a two-person outing with a return-before-dusk condition.
+day_28_notes:
+  - The active subject and Luo Jing departed in the morning for the near-ridge dewleaf task.
+  - They gathered enough dewleaf by early afternoon and encountered one juvenile Firestripe Wolf probing the route.
+  - Luo Jing chose a conservative response: hold position, use Fireball to force distance, and avoid chasing into ridge brush.
+  - The wolf withdrew alive, so no beast materials were harvested.
+  - The team returned before dusk and reported task completion at Mission Hall.
+  - The active subject returned to the Fire Courtyard after the task, did not train further, and slept through the night.
+day_29_notes:
+  - The active subject woke after a full night's rest with mana recovered.
+  - The first field task left practical fatigue and one combat-experience point, but no wound.
+  - The active subject chose a self-directed near-ridge wild trial instead of accepting a task or asking Luo Jing to accompany him.
+  - Self-directed wild trial access is allowed for an outer disciple in daylight, but gives no task reward and carries higher personal responsibility.

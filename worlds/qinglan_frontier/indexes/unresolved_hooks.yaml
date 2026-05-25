@@ -7,6 +7,225 @@ hooks:
       - char-active-subject
       - facility-qingyang-spirit-test-yard
     priority: high
+    state: resolved
+    resolution: Formal retest confirmed a single-element heavenly fire root.
+  - id: hook-first-outer-affairs-report
+    source: event-formal-fire-heavenly-root-confirmation
+    description: The active subject should report the confirmed heavenly fire root result to Outer Affairs Hall to complete outer-disciple registration.
+    related_entities:
+      - char-active-subject
+      - facility-qingyang-outer-affairs-hall
+    priority: high
+    state: resolved
+    resolution: The active subject completed outer-disciple registration and received first resources.
+  - id: hook-first-spell-practice
+    source: event-first-outer-disciple-registration
+    description: The active subject has read the Fireball manual once, but actual casting practice still requires a safe place and fresh time.
+    related_entities:
+      - char-active-subject
+      - sect-qingyang
+    priority: high
+    state: resolved
+    resolution: The active subject completed safe practice-ground casting, later raised Fireball to practiced fixed-target reliability.
+  - id: hook-safe-fireball-practice-session
+    source: event-night-return-and-fireball-manual-reading
+    description: The active subject has manual familiarity and Luo Jing's basic advice, but still needs a safe practice-ground session before real Fireball use.
+    related_entities:
+      - char-active-subject
+      - sect-qingyang
+    priority: high
+    state: resolved
+    resolution: The active subject completed a first low-output practice-ground Fireball session without residence damage or rule violation.
+  - id: hook-stabilize-fireball-entry
+    source: event-first-safe-fireball-practice
+    description: The active subject has produced unstable Fireball sparks, but needs more practice before using Fireball reliably in danger.
+    related_entities:
+      - char-active-subject
+      - facility-qingyang-practice-ground
+    priority: high
+    state: resolved
+    resolution: The active subject completed an afternoon practice session and stabilized Fireball at entry level.
+  - id: hook-fireball-practiced-stage
+    source: event-afternoon-fireball-entry-stabilization
+    description: Fireball is now entry-level but not practiced. Further gains require more practice, guidance, or real pressure, and repeated overtraining risks mana exhaustion.
+    related_entities:
+      - char-active-subject
+      - facility-qingyang-practice-ground
+      - char-luo-jing
+    priority: medium
+    state: resolved
+    resolution: Luo Jing corrected the active subject's control, and sustained low-output practice raised Fireball to practiced fixed-target reliability.
+  - id: hook-first-task-choice
+    source: event-first-mission-hall-task-board-inspection
+    description: The active subject has inspected Mission Hall tasks but has not accepted one. Safer errands, market verification, supervised herb sorting, and riskier field gathering are all possible paths with different costs.
+    related_entities:
+      - char-active-subject
+      - facility-qingyang-mission-hall
+      - sect-qingyang
+    priority: high
+    state: resolved
+    resolution: The active subject accepted the near-ridge dewleaf gathering task with Luo Jing as a cautious first field outing.
+  - id: hook-luo-jing-fireball-guidance
+    source: event-asked-luo-jing-about-fireball-practice
+    description: Luo Jing may give deeper Fireball guidance later if the active subject demonstrates discipline at the practice ground.
+    related_entities:
+      - char-active-subject
+      - char-luo-jing
+    priority: medium
+    state: resolved
+    resolution: Luo Jing gave one informal correction session after the active subject demonstrated discipline at the practice ground.
+  - id: hook-outer-residence-neighbors
+    source: event-met-fire-courtyard-neighbors
+    description: Chen Qiao and Luo Jing are now nearby outer-residence contacts. They can provide routine guidance, rumors, or social pressure, but their claims are not automatically facts.
+    related_entities:
+      - char-active-subject
+      - char-chen-qiao
+      - char-luo-jing
+      - outer_residence_fire_courtyard-temp-room
+    priority: medium
+    state: active
+  - id: hook-background-evolution-after-training-skip
+    source: background_evolution_policy
+    description: The day-14-to-day-27 training skip required a coarse evolution pass for related NPCs and local institutions, without fully simulating unrelated sect members.
+    related_entities:
+      - char-active-subject
+      - char-chen-qiao
+      - char-luo-jing
+      - char-han-yue
+      - facility-qingyang-mission-hall
+    priority: medium
+    state: resolved
+    resolution: Chen Qiao, Luo Jing, Han Yue, the residence, and Mission Hall were coarsely updated for the skipped period.
+  - id: hook-chen-qiao-layer-2-rumor
+    source: event-heard-active-subject-layer-2-rumor
+    description: Chen Qiao has heard that the active subject may have reached Qi Refining layer 2. If approached, he may ask directly, spread it, or trade related gossip.
+    related_entities:
+      - char-active-subject
+      - char-chen-qiao
+      - outer_residence_fire_courtyard-temp-room
+    priority: medium
+    state: active
+  - id: hook-luo-jing-ridge-task-information
+    source: event-background-ridge-dewleaf-team-task
+    description: Luo Jing has recent near-ridge task experience and knows about scorch-claw tracks. This may affect companion choice and risk assessment for first field tasks.
+    related_entities:
+      - char-active-subject
+      - char-luo-jing
+      - facility-qingyang-mission-hall
+    priority: medium
+    state: active
+  - id: hook-outer-routine-guidance
+    source: event-asked-chen-qiao-about-outer-routines
+    description: "Chen Qiao's guidance suggests several next practical routes: verify rules at Outer Affairs Hall, go to the practice ground, check Mission Hall tasks, or ask Luo Jing for stricter fire-spell advice."
+    related_entities:
+      - char-active-subject
+      - char-chen-qiao
+      - sect-qingyang
+    priority: medium
+    state: resolved
+    resolution: The active subject verified key routine rules at Outer Affairs Hall and formed a short-term training plan before accepting tasks.
+  - id: hook-new-disciple-rules-briefing-due
+    source: event-checked-outer-rules-and-formed-training-plan
+    description: The active subject must complete the new outer-disciple rules briefing by Qingyang year 73, spring month 2, day 15, or nonessential task acceptance may be restricted.
+    related_entities:
+      - char-active-subject
+      - facility-qingyang-outer-affairs-hall
+      - sect-qingyang
+    priority: high
+    state: resolved
+    resolution: The active subject completed the required new outer-disciple rules briefing on day 14 before the deadline.
+  - id: hook-fire-foundation-public-lecture
+    source: event-checked-outer-rules-and-formed-training-plan
+    description: A public fire foundation lecture is posted for Qingyang year 73, spring month 2, day 16 morning. Attendance is optional but useful and recorded.
+    related_entities:
+      - char-active-subject
+      - sect-qingyang
+    priority: medium
+    state: resolved
+    resolution: The active subject attended the posted fire foundation public lecture on day 16 morning.
+  - id: hook-heavenly-root-observation
+    source: event-checked-outer-rules-and-formed-training-plan
+    description: Deacons and senior outer disciples are interested in the active subject's heavenly fire root, but they are watching discipline, foundation stability, and task choices before offering stronger backing.
+    related_entities:
+      - char-active-subject
+      - char-han-yue
+      - sect-qingyang
+    priority: medium
+    state: active
+  - id: hook-layer-2-registration-and-observation
+    source: event-breakthrough-to-qi-refining-layer-2
+    description: The active subject has reached Qi Refining layer 2 earlier than ordinary mixed-root disciples. Outer Affairs will expect a routine status registration, and the heavenly-root observation may become more direct.
+    related_entities:
+      - char-active-subject
+      - char-han-yue
+      - facility-qingyang-outer-affairs-hall
+      - sect-qingyang
+    priority: high
+    state: resolved
+    resolution: The active subject registered Qi Refining layer 2 at Outer Affairs Hall on day 27 morning; observation continues under the broader heavenly-root hook.
+  - id: hook-near-ridge-dewleaf-team-task-day-28
+    source: event-accepted-near-ridge-dewleaf-team-task
+    description: The active subject and Luo Jing have accepted a near-ridge dewleaf gathering task for day 28 morning. The route has low-to-medium risk, fresh scorch-claw track warnings, and a return-before-dusk condition.
+    related_entities:
+      - char-active-subject
+      - char-luo-jing
+      - facility-qingyang-mission-hall
+      - qinglan-frontier-outer-ridge
+    priority: high
+    state: resolved
+    resolution: The team completed the dewleaf task, repelled a juvenile Firestripe Wolf without pursuit, returned before dusk, and submitted the bundle.
+  - id: hook-firestripe-wolf-route-warning
+    source: event-repelled-juvenile-firestripe-wolf
+    description: A juvenile Firestripe Wolf withdrew alive from the near-ridge route. It may avoid the route briefly, return with stronger territorial behavior, or indicate a nearby fire-warm den area.
+    related_entities:
+      - beast-firestripe-wolf-qr2-73-02-28-a
+      - qinglan-frontier-outer-ridge
+      - char-active-subject
+      - char-luo-jing
+    priority: medium
+    state: active
+  - id: hook-self-directed-trial-day-29
+    source: event-started-self-directed-near-ridge-trial
+    description: The active subject has entered Qinglan Outer Ridge alone for a self-directed wild trial. This should unfold as a foreground scene with observation, route choice, and risk management rather than a compressed outcome.
+    related_entities:
+      - char-active-subject
+      - qinglan-frontier-outer-ridge
+      - beast-firestripe-wolf-qr2-73-02-28-a
+    priority: high
+    state: active
+  - id: hook-outer-court-spring-drill-contest
+    source: event-learned-outer-court-spring-drill-contest
+    description: The active subject learned of the day-35 outer-court spring drill contest. Registration is day 31 to day 33, and preparation through field experience, spell control, and equipment access may matter.
+    related_entities:
+      - char-active-subject
+      - sect-qingyang
+      - facility-qingyang-outer-affairs-hall
+    priority: medium
+    state: active
+  - id: hook-first-market-purchase
+    source: event-first-trip-to-qinglan-herb-market
+    description: The active subject has reached Qinglan Herb Market with twelve low-grade spirit stones and should decide what to inspect or buy without assuming all desired goods are available.
+    related_entities:
+      - char-active-subject
+      - qinglan-herb-market
+    priority: high
+    state: active
+  - id: hook-herb-quality-judgment
+    source: event-inspected-qinglan-herb-stall
+    description: The active subject can use pill-hall background to bargain over herb quality, buy fire-warm grass, avoid the padded bundle, or ask where the gatherer found fire-aspected herbs.
+    related_entities:
+      - char-active-subject
+      - qinglan-herb-market
+    priority: medium
+    state: active
+  - id: hook-market-attention-risk
+    source: action-permission-resolver
+    description: The subject's recent heavenly fire root confirmation creates low attention risk in the market; watchers, informants, or pill-hall contacts may notice the trip.
+    related_entities:
+      - char-active-subject
+      - qinglan-herb-market
+      - sect-qingyang
+    priority: medium
     state: active
   - id: hook-pill-hall-old-background
     source: world-seed

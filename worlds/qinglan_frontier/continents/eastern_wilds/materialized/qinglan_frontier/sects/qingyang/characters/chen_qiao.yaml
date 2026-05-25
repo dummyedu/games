@@ -1,0 +1,95 @@
+id: char-chen-qiao
+name: Chen Qiao
+state: standard_character
+identity:
+  current_status: outer_disciple
+  sect: sect-qingyang
+  residence: fire_courtyard_outer_rooms
+true_state:
+  realm: qi_refining
+  layer: 2
+  cp: 176
+  current_layer_cp_required: 240
+  spiritual_root: four_element_roots
+  root_elements:
+    - wood
+    - fire
+    - earth
+    - metal
+  age: 18
+  lifespan_limit: 120
+  foundation: ordinary
+  pill_poison: 1
+  wounds: []
+cultivation_state:
+  rhythm: occasional
+  bottleneck: resources
+combat:
+  mana_max: 70
+  mana_current: 66
+  life: 100
+  divine_sense: 11
+  attack: 20
+  defense: 13
+  speed: 16
+  control_resistance: 5
+  poison_resistance: 4
+  combat_experience: 5
+skills: {}
+equipment: []
+resources:
+  spirit_stones_low: 7
+  consumables: []
+knowledge:
+  known_facts:
+    - Fire Courtyard quiet hours are enforced by senior outer disciples.
+    - New outer disciples usually ask at the practice ground before trying combat spells.
+  rumors:
+    - Some outer disciples say a newly confirmed heavenly fire root entered the courtyard tonight.
+    - The heavenly fire root newcomer stayed quiet for more than ten days and may already have reached Qi Refining layer 2.
+relationships:
+  char-active-subject:
+    type: outer_residence_neighbor
+    trust: 44
+    belief: Quiet but fast-rising newcomer with unusual attention around him; worth being friendly to, but likely to draw talk.
+event_history:
+  - id: event-met-active-subject-at-night
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+      time_of_day: night
+    place: outer_residence_fire_courtyard-temp-room
+    summary: Chen Qiao briefly greeted the active subject during night quiet hours.
+  - id: event-explained-outer-routines-to-active-subject
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 13
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: Chen Qiao explained that outer disciples usually rotate between practice, small tasks, resource management, and information gathering, while warning that much of the outer court runs on habit rather than written reminders.
+  - id: event-background-small-errands-during-active-subject-retreat
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 17
+      time_of_day: day_17_to_day_25
+    place: facility-qingyang-mission-hall and outer_residence_fire_courtyard-temp-room
+    summary: While the active subject focused on cultivation, Chen Qiao took several small outer-court errands, earned a little spending money, and kept up with Fire Courtyard rumors without making major cultivation progress.
+  - id: event-heard-active-subject-layer-2-rumor
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: morning
+    place: outer_residence_fire_courtyard-temp-room
+    summary: Chen Qiao heard that the quiet heavenly-root newcomer may have reached Qi Refining layer 2 unusually quickly, but he has not yet confirmed it directly.

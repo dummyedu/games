@@ -1,0 +1,43 @@
+id: qinglan-frontier-outer-ridge
+name: Qinglan Outer Ridge
+type: wild_site
+state: materialized
+region: qinglan-frontier
+risk_band: low_to_medium
+features:
+  - dry_ridge_paths
+  - low_tier_dewleaf_patches
+  - scattered_fire_warm_brush
+known_risks:
+  - fresh_firestripe_wolf_tracks
+  - dusk_return_risk
+  - inexperienced_outer_disciple_route_errors
+current_scene:
+  active_subject_stage: self_directed_trial_trailhead_day_29
+  day_28_weather: clear_dry_wind
+  day_29_weather: thin_clouds_dry_wind
+  gathered:
+    dewleaf_bundle: sufficient_for_task
+  encounter:
+    beast: beast-firestripe-wolf-qr2-73-02-28-a
+    outcome: repelled_without_chase
+    materials_harvested: []
+  day_29_trial_scene:
+    time: late_morning
+    party:
+      - char-active-subject
+    official_task: none
+    return_constraint: before_dusk
+    visible_signs:
+      - yesterday's trampled dewleaf patch is easy to recognize
+      - old scorched grass marks from the Firestripe Wolf encounter remain on the slope
+      - a narrow animal trail climbs toward warmer brush above the safe route
+      - dry wind makes scent and sound unreliable
+    immediate_risks:
+      - solo_disciple_route_error
+      - following_beast_tracks_too_far
+      - spending_mana_before_return
+event_hooks:
+  - near_ridge_dewleaf_team_task_day_28
+  - firestripe_wolf_route_warning
+  - self_directed_trial_day_29

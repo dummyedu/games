@@ -16,10 +16,46 @@ entities:
     type: facility
     state: materialized
     path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/facilities/spirit_test_yard.yaml
+  facility-qingyang-practice-ground:
+    type: facility
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/facilities/practice_ground.yaml
+  facility-qingyang-mission-hall:
+    type: facility
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/facilities/mission_hall.yaml
+  facility-qingyang-scripture-pavilion:
+    type: facility
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/facilities/scripture_pavilion.yaml
+  char-han-yue:
+    type: character
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/characters/han_yue.yaml
+  char-chen-qiao:
+    type: character
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/characters/chen_qiao.yaml
+  char-luo-jing:
+    type: character
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/characters/luo_jing.yaml
+  outer_residence_fire_courtyard-temp-room:
+    type: residence
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/sects/qingyang/residences/fire_courtyard_temp_room.yaml
   qinglan-herb-market:
     type: market
-    state: indexed
-    path: null
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/markets/qinglan_herb_market.yaml
+  qinglan-frontier-outer-ridge:
+    type: wild_site
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/wild_sites/outer_ridge/site.yaml
+  beast-firestripe-wolf-qr2-73-02-28-a:
+    type: beast
+    state: materialized
+    path: continents/eastern_wilds/materialized/qinglan_frontier/wild_sites/outer_ridge/beasts/firestripe_wolf_juvenile_a.yaml
   qinglan-demonwood-forest:
     type: wild_site
     state: indexed

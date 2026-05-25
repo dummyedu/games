@@ -1,0 +1,87 @@
+id: char-han-yue
+name: Han Yue
+state: standard_character
+role:
+  sect: sect-qingyang
+  post: spirit_test_deacon
+  authority: outer_entry_procedure_official
+true_state:
+  realm: qi_refining
+  layer: 7
+  cp: 2600
+  current_layer_cp_required: 3300
+  spiritual_root: three_element_roots
+  root_elements:
+    - fire
+    - earth
+    - wood
+  age: 34
+  lifespan_limit: 120
+  foundation: ordinary
+  pill_poison: 8
+  wounds: []
+cultivation_state:
+  rhythm: stable
+  bottleneck: foundation_establishment_resources
+combat:
+  mana_max: 230
+  mana_current: 230
+  life: 100
+  divine_sense: 45
+  attack: 70
+  defense: 48
+  speed: 42
+  control_resistance: 18
+  poison_resistance: 8
+  combat_experience: 32
+skills:
+  spell-fireball-1:
+    source: Qingyang outer library
+    completeness: complete
+    stage: proficient
+    sp: 760
+equipment: []
+resources:
+  spirit_stones_low: 38
+  consumables: []
+knowledge:
+  known_facts:
+    - Heavenly roots are normally assigned matching first spells and monthly cultivation resources after outer-entry registration.
+    - Qingyang Sect still requires procedure records even for high-grade roots.
+    - Exceptional roots attract patronage, envy, and task expectations.
+  rumors: []
+relationships:
+  char-active-subject:
+    type: observed_heavenly_root_outer_disciple
+    trust: 47
+    belief: A rare heavenly fire root from pill-hall servant background who followed early procedure, registered layer 2 quickly, and has started cautious task participation.
+event_history:
+  - id: event-answered-active-subject-treatment-question
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 12
+    place: facility-qingyang-spirit-test-yard
+    summary: Han Yue told the active subject that heavenly-root treatment depends on completing Outer Affairs Hall registration and accepting sect obligations.
+  - id: event-received-active-subject-observation-note
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: morning
+    place: facility-qingyang-outer-affairs-hall
+    summary: Han Yue received a routine note that the active subject completed the rules briefing, attended the fire foundation lecture, avoided early field trouble, and likely reached Qi Refining layer 2; no personal summons has been issued yet.
+  - id: event-received-layer-2-registration-record
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: morning
+    place: facility-qingyang-outer-affairs-hall
+    summary: Han Yue received confirmation that the active subject formally registered Qi Refining layer 2. The record increases attention but still does not authorize elder or ancestor access.

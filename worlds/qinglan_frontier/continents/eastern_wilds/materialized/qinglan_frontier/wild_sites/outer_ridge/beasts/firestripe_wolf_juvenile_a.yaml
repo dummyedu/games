@@ -1,0 +1,47 @@
+id: beast-firestripe-wolf-qr2-73-02-28-a
+template: beast-firestripe-wolf
+variant: juvenile
+realm: qi_refining_beast
+layer: 2
+state: alive
+location: qinglan-frontier-outer-ridge
+generation:
+  method: template_variant_roll
+  seed: qinglan-day28-near-ridge-scorch-claw-trace-a
+  rolls:
+    life_multiplier: 0.97
+    mana_multiplier: 1.02
+    attack_multiplier: 1.03
+    defense_multiplier: 0.95
+    speed_multiplier: 1.08
+combat:
+  mana_max: 38
+  mana_current: 26
+  life: 52
+  attack: 15
+  defense: 7
+  speed: 18
+  divine_sense: 4
+  control_resistance: 3
+  poison_resistance: 2
+conditions:
+  - singed_and_repelled
+growth_state:
+  age_stage: juvenile
+  territory_pressure: near_ridge_edge
+  hunger: probing
+growth_history: []
+material_state:
+  corpse_condition: null
+  harvested: []
+event_history:
+  - id: event-repelled-by-active-subject-and-luo-jing
+    time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 28
+      time_of_day: early_afternoon
+    place: qinglan-frontier-outer-ridge
+    summary: The juvenile Firestripe Wolf tested the dewleaf route, was singed and pressured by coordinated Fireball use, and withdrew alive into ridge brush.

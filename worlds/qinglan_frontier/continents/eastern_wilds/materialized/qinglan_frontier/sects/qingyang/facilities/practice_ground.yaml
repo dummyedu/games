@@ -1,0 +1,32 @@
+id: facility-qingyang-practice-ground
+name: Qingyang Practice Ground
+type: facility
+state: materialized
+owner: sect-qingyang
+functions:
+  - supervised_basic_spell_practice
+  - target_lane_use
+  - outer_disciple_combat_drills
+access:
+  outer_disciple: allowed
+  servant: restricted
+rules:
+  use_clear_target_lane: true
+  low_output_for_first_attempts: true
+  damaging_shared_targets_requires_compensation: true
+  private_duels_without_registration: forbidden
+scene_state:
+  active_subject_stage: fireball_practiced_after_sustained_drills
+  crowd_level: light
+  target_lanes:
+    fire_lane_3:
+      status: repeatedly_scorched_and_still_serviceable
+      assigned_to: char-active-subject
+  observed_result:
+    - The active subject progressed from unstable sparks to a small unstable Fireball that can cross the target lane.
+    - No residence or shared target damage occurred.
+    - Mana expenditure was heavy enough that further same-day practice would risk exhaustion.
+    - After sustained low-output drills and one public lecture, the active subject can now form a compact Fireball reliably against a fixed practice target.
+event_hooks:
+  - stabilize_fireball_entry
+  - possible_luo_jing_followup_guidance

@@ -1,0 +1,150 @@
+id: facility-qingyang-mission-hall
+name: Qingyang Mission Hall
+type: facility
+state: materialized
+owner: sect-qingyang
+functions:
+  - outer_disciple_task_assignment
+  - task_completion_record
+  - contribution_credit_record
+  - field_risk_notice
+access:
+  outer_disciple: allowed
+  servant: restricted
+rules:
+  task_acceptance_requires_identity_token: true
+  abandoning_accepted_task_can_reduce_credit: true
+  field_tasks_warn_but_do_not_guarantee_actual_risk: true
+  rumors_on_task_board_are_not_facts: true
+scene_state:
+  active_subject_stage: task_board_changed_during_training_period
+  crowd_level: busy
+  clerk_attention: ordinary
+  board_sections:
+    - low_risk_errands
+    - market_verification
+    - herb_processing
+    - field_gathering
+  recent_changes:
+    - Some day-13 low-risk herb sorting quota was filled and reposted at a lower daily quota.
+    - The earlier market-price verification notice expired and was replaced with a fresh notice because market prices kept moving.
+    - One near-ridge dewleaf route was completed by another team, but new ridge-side work remains available with stronger warnings.
+    - Demonwood-edge notices now mention fresh scorch-claw tracks; the reward rose slightly, but the risk warning also became clearer.
+available_tasks:
+  - id: task-sort-low-tier-herbs
+    title: Sort Low-Tier Herb Deliveries
+    type: sect_procedure
+    risk: none
+    time_cost: half_day
+    reward:
+      spirit_stones_low: 1
+      contribution: 1
+    requirements:
+      combat: none
+      notes:
+        - Pill-hall background may help.
+    status: available_limited_daily_quota
+  - id: task-verify-qinglan-market-herb-prices
+    title: Recheck Qinglan Market Herb Prices
+    type: travel
+    risk: low
+    time_cost: one_day
+    reward:
+      spirit_stones_low: 2
+      contribution: 1
+    requirements:
+      combat: avoid_if_possible
+      notes:
+        - The active subject's old market visit is stale; official completion requires accepting the fresh notice and checking current prices.
+    status: refreshed_available
+  - id: task-gather-dewleaf-near-ridge
+    title: Gather Dewleaf Near Outer Ridge, Second Posting
+    type: field_gathering
+    risk: low_to_medium
+    time_cost: one_day
+    reward:
+      spirit_stones_low: 3
+      contribution: 2
+    requirements:
+      recommended_realm: qi_refining_layer_1_or_above
+      recommended_preparation:
+        - stable_basic_attack_or_escape_method
+        - avoid_traveling_alone_if_unfamiliar
+        - return_before_dusk_due_to_recent_tracks
+    status: completed_by_active_subject_team_day_28
+    accepted_by:
+      - char-active-subject
+      - char-luo-jing
+    accepted_time:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 27
+      time_of_day: late_afternoon
+    conditions:
+      - depart_morning_day_28
+      - return_before_dusk
+      - split_reward_by_prior_agreement
+  - id: task-demonwood-fire-warm-grass
+    title: Scout Fire-Warm Grass Signs Near Demonwood Forest Edge
+    type: field_gathering
+    risk: medium
+    time_cost: one_to_two_days
+    reward:
+      spirit_stones_low: 6
+      contribution: 4
+    requirements:
+      recommended_realm: qi_refining_layer_2_or_above
+      recommended_preparation:
+        - reliable_combat_spell
+        - travel_companion
+        - basic_beast_avoidance_knowledge
+        - avoid_scorch_claw_tracks_if_found
+    status: available_but_requires_partner_for_new_outer_disciple
+event_hooks:
+  - first_task_choice
+  - herb_supply_pressure
+  - demonwood_forest_risk
+active_task_records:
+  - id: active-task-gather-dewleaf-near-ridge-day-28
+    source_task: task-gather-dewleaf-near-ridge
+    participants:
+      - char-active-subject
+      - char-luo-jing
+    planned_departure:
+      calendar: Qingyang
+      year: 73
+      season: spring
+      month: 2
+      day: 28
+      time_of_day: morning
+    expected_duration: one_day
+    reward_if_completed:
+      spirit_stones_low: 3
+      contribution: 2
+    split_terms:
+      active_subject:
+        spirit_stones_low: 1
+        contribution: 1
+      char-luo-jing:
+        spirit_stones_low: 2
+        contribution: 1
+    risk_notes:
+      - low_to_medium_field_gathering
+      - fresh_scorch_claw_tracks_reported_near_some_ridge_routes
+      - avoid_dusk_return
+    completion:
+      time:
+        calendar: Qingyang
+        year: 73
+        season: spring
+        month: 2
+        day: 28
+        time_of_day: late_afternoon
+      status: completed
+      report:
+        - dewleaf bundle delivered
+        - juvenile Firestripe Wolf encountered and repelled
+        - no corpse or beast materials submitted
+        - team returned before dusk
